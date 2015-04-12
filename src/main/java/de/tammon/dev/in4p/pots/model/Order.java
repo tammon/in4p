@@ -17,30 +17,20 @@
 
 package de.tammon.dev.in4p.pots.model;
 
-import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
 
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by tammschw on 12/04/15.
  */
-public class Customer {
+public class Order {
 
     @Id
     private String id;
-
-    private String customerId;
-
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
-
-    private Address address;
-
-    @Email
-    private String email;
+    private String orderId;
+    private Customer customer;
+    private List<Product> products;
 
     public String getId() {
         return id;
@@ -50,35 +40,27 @@ public class Customer {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Address getAddress() {
-        return address;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

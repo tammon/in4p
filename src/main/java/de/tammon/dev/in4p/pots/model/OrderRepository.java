@@ -23,7 +23,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by tammschw on 12/04/15.
  */
-
 @Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
+public interface OrderRepository extends MongoRepository<Order, String> {
+
 }
