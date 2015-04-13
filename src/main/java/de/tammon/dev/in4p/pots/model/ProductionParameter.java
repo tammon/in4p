@@ -17,45 +17,15 @@
 
 package de.tammon.dev.in4p.pots.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import java.util.List;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 13/04/15.
  */
-public class Order extends AbstractDocument {
+public class ProductionParameter {
 
-    private String orderId;
+    private String name;
+    private String unit;
+    private Map<String, double> parameterSet;
 
-    @DBRef
-    private Customer customer;
-
-    @DBRef
-    private List<Product> products;
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
 }

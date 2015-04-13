@@ -19,6 +19,8 @@ package de.tammon.dev.in4p.pots.model;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 /**
  * Created by tammschw on 12/04/15.
  */
@@ -28,6 +30,7 @@ public class Product extends AbstractDocument {
     private String productId;
     private String productionId;
     private String productionIdPos;
+    private List<ProductionParameter> productionParameters;
 
     public String getProductName() {
         return productName;
