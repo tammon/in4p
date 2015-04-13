@@ -25,10 +25,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by tammschw on 12/04/15.
  */
-public class Customer {
-
-    @Id
-    private String id;
+public class Customer extends AbstractDocument {
 
     private String customerId;
 
@@ -41,14 +38,6 @@ public class Customer {
 
     @Email
     private String email;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;

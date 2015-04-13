@@ -22,22 +22,12 @@ import org.springframework.data.annotation.Id;
 /**
  * Created by tammschw on 12/04/15.
  */
-public class Product {
+public class Product extends AbstractDocument {
 
-    @Id
-    private String id;
     private String productName;
     private String productId;
     private String productionId;
     private String productionIdPos;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getProductName() {
         return productName;

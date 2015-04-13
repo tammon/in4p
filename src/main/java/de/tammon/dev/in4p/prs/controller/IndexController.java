@@ -15,42 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.in4p.pots.model;
+package de.tammon.dev.in4p.prs.controller;
 
-import org.springframework.data.annotation.Id;
-
-import java.util.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by tammschw on 12/04/15.
  */
-public class Order extends AbstractDocument {
+@Controller
+@RequestMapping("/")
+public class IndexController {
 
-    private String orderId;
-    private Customer customer;
-    private List<Product> products;
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    @RequestMapping(method = RequestMethod.GET)
+    public String index(Model model) {
+        return "index";
     }
 }
