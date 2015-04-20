@@ -17,50 +17,72 @@
 
 package de.tammon.dev.in4p.pots.model;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by tammschw on 12/04/15.
  */
+@Component
 public class Product extends AbstractDocument {
 
     private String productName;
-    private String productId;
+    private String externalProductId;
+    private String productType;
     private String productionId;
     private String productionIdPos;
     private List<ProductionParameter> productionParameters;
 
-    public String getProductName() {
-        return productName;
+    public Product() {
+    }
+
+    /**
+     * Creates a new instance of {@link Product}
+     * @param productName specify the product's name
+     */
+    public Product(String productName, String productType) {
+        this.productName = productName;
+        this.productType = productType;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public String getProductId() {
-        return productId;
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
+    /**
+     * Set the {@link Product} ID
+     * @param productId new {@link Product}
+     */
     public void setProductId(String productId) {
         this.productId = productId;
     }
 
-    public String getProductionId() {
-        return productionId;
+    /**
+     * Get Product Type
+     * @return productType
+     */
+    public String getProductType() {
+        return productType;
     }
 
-    public void setProductionId(String productionId) {
-        this.productionId = productionId;
+    public String getProductId() {
+        return productId;
     }
 
-    public String getProductionIdPos() {
-        return productionIdPos;
-    }
-
-    public void setProductionIdPos(String productionIdPos) {
-        this.productionIdPos = productionIdPos;
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productName='" + productName + '\'' +
+                ", productId='" + productId + '\'' +
+                ", productType='" + productType + '\'' +
+                ", productionId='" + productionId + '\'' +
+                ", productionIdPos='" + productionIdPos + '\'' +
+                ", productionParameters=" + productionParameters +
+                '}';
     }
 }

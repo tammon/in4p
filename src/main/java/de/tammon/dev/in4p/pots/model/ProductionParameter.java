@@ -17,7 +17,8 @@
 
 package de.tammon.dev.in4p.pots.model;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tammschw on 13/04/15.
@@ -26,6 +27,23 @@ public class ProductionParameter {
 
     private String name;
     private String unit;
-    private Map<String, double> parameterSet;
+    private Map<String, Double> parameterSet;
 
+
+    /**
+     * creates a new {@link ProductionParameter} object with the given name.
+     * @param name Name of Parameter set must not be {@literal null}
+     */
+    public ProductionParameter(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Adds a new key - value pair to the parameterSet
+     * @param key unique x-axis value (e.g. time)
+     * @param value y-axis value (e.g. pressure)
+     */
+    public void addParameter(String key, Double value) {
+        parameterSet.put(key, value);
+    }
 }

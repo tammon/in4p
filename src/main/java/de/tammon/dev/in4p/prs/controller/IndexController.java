@@ -17,10 +17,15 @@
 
 package de.tammon.dev.in4p.prs.controller;
 
+import de.tammon.dev.in4p.pots.model.Order;
+import de.tammon.dev.in4p.pots.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.*;
 
 /**
  * Created by tammschw on 12/04/15.
@@ -29,8 +34,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class IndexController {
 
+    @Autowired
+    Order order;
+
+    @Autowired
+    Product product, product1, product2;
+
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
+        product.setProductName("test1");
+        product.setProductType("te1");
+        product.setProductId("1");
+        product1.setProductName("test2");
+        product1.setProductType("te1");
+        product2.setProductName("test2");
+        product2.setProductType("te1");
+
+        List<Product> products = new ArrayList<Product>();
+        products.add(product);
+        products.add(product1);
+        products.add(product2);
+
+        order.addProduct(product);
+        order.addProducts(products);
+        System.out.println(order.getProducts());
         return "index";
     }
 }

@@ -17,13 +17,14 @@
 
 package de.tammon.dev.in4p.pots.controller;
 
+import de.tammon.dev.in4p.pots.model.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 /**
  * Created by tammschw on 12/04/15.
  */
-@Controller
 public class IndexController {
 
     public String welcome(Model model) {
