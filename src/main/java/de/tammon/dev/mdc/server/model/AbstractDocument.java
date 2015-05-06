@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.in4p.pots.model;
+package de.tammon.dev.mdc.server.model;
 
 import org.springframework.data.annotation.Id;
 

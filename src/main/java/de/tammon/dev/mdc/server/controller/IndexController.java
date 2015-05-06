@@ -15,42 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.in4p.pots.model;
+package de.tammon.dev.mdc.server.controller;
 
-import org.springframework.data.annotation.Id;
-
-import java.util.List;
+import org.springframework.ui.Model;
 
 /**
  * Created by tammschw on 12/04/15.
  */
-public class Order extends AbstractDocument {
+public class IndexController {
 
-    private String orderId;
-    private Customer customer;
-    private List<Product> products;
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public String welcome(Model model) {
+        model.addAttribute("message", "hello World!");
+        return "index";
     }
 }

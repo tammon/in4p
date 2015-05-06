@@ -15,19 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.in4p.pots.controller;
+package de.tammon.dev.mdc.server.model;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by tammschw on 12/04/15.
  */
-@Controller
-public class IndexController {
+@Repository
+public interface OrderRepository extends MongoRepository<Order, String> {
 
-    public String welcome(Model model) {
-        model.addAttribute("message", "hello World!");
-        return "index";
-    }
 }

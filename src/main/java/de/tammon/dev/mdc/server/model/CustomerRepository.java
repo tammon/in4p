@@ -14,16 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package de.tammon.dev.in4p.pots.model;
+package de.tammon.dev.mdc.server.model;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by tammschw on 12/04/15.
  */
 
 @Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
+public interface CustomerRepository extends MongoRepository<Customer, String> {
+
+    List<Customer> findByLastName (String lastName);
+    Customer findByCustomerId(String customerId);
 }
