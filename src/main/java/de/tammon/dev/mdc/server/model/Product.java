@@ -28,10 +28,17 @@ import java.util.List;
 public class Product extends AbstractDocument {
 
     private String productName;
+
+    // Product ID that is referenced by the QR Code
     private String externalProductId;
+
     private String productType;
+
+    // ID and Position that is used during the production process
     private String productionId;
     private String productionIdPos;
+
+    // Assigned production parameter
     private List<ProductionParameter> productionParameters;
 
     public Product() {
@@ -56,10 +63,10 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the {@link Product} ID
-     * @param productId new {@link Product}
+     * @param productionId new {@link Product}
      */
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public String getProductionId() {
+        return productionId;
     }
 
     /**
@@ -70,15 +77,19 @@ public class Product extends AbstractDocument {
         return productType;
     }
 
-    public String getProductId() {
-        return productId;
+    /**
+     * Get the external Product ID (reffered by QR Code)
+     * @return {@link String} externalProductId
+     */
+    public String getExternalProductId() {
+        return externalProductId;
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "productName='" + productName + '\'' +
-                ", productId='" + productId + '\'' +
+                ", externalProductId='" + externalProductId + '\'' +
                 ", productType='" + productType + '\'' +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
