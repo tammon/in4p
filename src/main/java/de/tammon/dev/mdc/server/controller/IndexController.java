@@ -17,15 +17,25 @@
 
 package de.tammon.dev.mdc.server.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by tammschw on 12/04/15.
  */
+@Controller
 public class IndexController {
 
+    @RequestMapping("/")
     public String welcome(Model model) {
         model.addAttribute("message", "hello World!");
         return "index";
+    }
+
+    @RequestMapping("/product")
+    public String product(Model model) {
+//        model.addAttribute("title", "Produktdaten");
+        return "product";
     }
 }
