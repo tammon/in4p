@@ -29,7 +29,8 @@ public class IndexController {
 
     @RequestMapping("/")
     public String welcome(Model model) {
-        model.addAttribute("message", "hello World!");
+        model.addAttribute("container", "index");
+        model.addAttribute("title", "Startseite");
         return "template";
     }
 }
