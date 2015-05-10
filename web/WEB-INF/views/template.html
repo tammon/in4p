@@ -17,11 +17,15 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en" th:replace="fragments/header :: header (title='Ihre Produktdaten')">
+<head lang="en" th:replace="fragments/header :: header (${title})">
     <meta charset="UTF-8"/>
-    <title></title>
+    <title>Testseite</title>
 </head>
-<body th:replace="fragments/wrapper :: wrapper">r
-    Hallo Welt!
+
+<body th:replace="fragments/wrapper :: wrapper (${container})">
+
+Hallo Welt!
+
 </body>
+
 </html>
