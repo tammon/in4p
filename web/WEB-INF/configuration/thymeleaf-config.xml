@@ -25,17 +25,18 @@
        <!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
        <!-- **************************************************************** -->
        <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-              <property name="prefix" value="/WEB-INF/views/" />
-              <property name="suffix" value=".html" />
-              <property name="templateMode" value="HTML5" />
+           <property name="prefix" value="/WEB-INF/views/" />
+           <property name="suffix" value=".html" />
+           <property name="templateMode" value="HTML5" />
+           <property name="characterEncoding" value="UTF-8" />
        </bean>
 
        <bean id="springTemplateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-              <property name="templateResolver" ref="templateResolver"/>
+           <property name="templateResolver" ref="templateResolver"/>
        </bean>
 
        <bean id="thymeleafViewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-              <property name="templateEngine" ref="springTemplateEngine"/>
+           <property name="templateEngine" ref="springTemplateEngine"/>
        </bean>
 
 </beans>
