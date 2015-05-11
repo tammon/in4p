@@ -24,7 +24,73 @@
 <body>
 
 <section th:fragment="product">
-  Das ist der Produktcontainer
+  <h1>Hallo Herr Mustermann! <small>Produktionsdatenübersicht Ihrer Taschenlampe</small></h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>Vielen Dank, dass Sie unsere Industrie 4.0 Anlage besucht haben. Wir haben für Sie im folgenden alle Daten bereitgestellt,
+            die im Zuge der Ferigung Ihrer persönlichen Taschenlampe erfasst wurden. Des Weiteren finden Sie auch die Kundendaten, die uns zum Zeitpunkt
+            der Produktion bekannt waren und in unserem System hinterlegt sind. Die hier angezeigten Produktionsdaten beziehen sich exakt auf die Taschenlampe,
+            die sie gerade in Ihrer Hand halten.
+          </p>
+          <p>
+            Dies ist ein Industrie 4.0 Projekt der DHBW Mosbach. Es soll Wege darlegen, Produktspezifische Daten während des Produktionsprozesses zu erfassen, zu speichern und
+            anschließend innerhalb des Wertschöpfungsprozesses wie aber auch vom Endkunden abrufen zu lassen. Diese Technologie ermöglicht es dem Kunden während und nach der Produktion
+            Daten über sein gekauftes Produkt abzurufen. Dies kann sowohl im Nachverfolgungsprozess als auch in Haftungsfragen sinnvoll sein. Der Hersteller kann aus der Masse der
+            produktspezifischen Daten mit Big Data Technologien Rückschlüsse auf Qualitäts- und Ausfallgrößen ziehen, um seine Prozesse zu optimieren und somit Ausfälle des Produktes
+            oder der Produktionsanlage zu vermeiden.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- general product information-->
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Ihre <span>Taschenlampe</span></h3>
+        </div>
+        <div class="panel-body">
+          Hier sind allgemeine Informationen
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- product data-->
+  <div class="row">
+
+    <div class="col-md-6">
+      <!-- production information panel-->
+      <div id="product-information" class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Produktionsdaten</h3>
+        </div>
+        <div class="panel-body">
+          <p>Hier sind Ihre Produktinformationen</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <!-- customer information panel-->
+      <div id="customer-information" class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Kundeninformationen</h3>
+        </div>
+        <div class="panel-body">
+          <p>Hier sind Ihre Kundeninformationen</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
 </body>
