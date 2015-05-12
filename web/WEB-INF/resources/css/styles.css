@@ -102,3 +102,7 @@
     display: inline;
     vertical-align: middle;
 }
+
+body {
+    padding-top: 70px;
+}
