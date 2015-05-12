@@ -86,3 +86,19 @@
 .navbar * {
     color: #fff !important;
 }
+
+.navbar-brand {
+    padding: 5px;
+}
+
+#icon-qr {
+    vertical-align: middle;
+    display: inline;
+    font-size: 2em;
+}
+
+#navbar-brand-name {
+    font-size: 1.5em;
+    display: inline;
+    vertical-align: middle;
+}
