@@ -69,4 +69,15 @@ public class Customer extends AbstractDocument {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId='" + customerId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address=" + address +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
