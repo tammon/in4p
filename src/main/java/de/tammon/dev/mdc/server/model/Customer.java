@@ -28,6 +28,13 @@ public class Customer extends AbstractDocument {
 
     private String customerId;
 
+    public enum Gender {
+        MALE,
+        FEMALE
+    }
+
+    @NotNull
+    private Gender gender;
     @NotNull
     private String firstName;
     @NotNull
@@ -68,5 +75,25 @@ public class Customer extends AbstractDocument {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId='" + customerId + '\'' +
+                ", gender=" + gender +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address=" + address +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
