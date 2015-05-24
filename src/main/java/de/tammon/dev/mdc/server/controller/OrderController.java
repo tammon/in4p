@@ -32,6 +32,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class OrderController {
 
+    /**
+     * processes the standard order view and the order success and fail page.
+     * @param model is processed by Thymeleaf in the view
+     * @param submitted Request Parameter that sets if a order was submitted before requesting this site
+     * @param success Request Parameter that sets if the order process of a previously submitted order was successful
+     * @return the view "template" with the right attributes in the model according to the Request Parameters
+     */
     @RequestMapping("/order")
     public String order (Model model,
                          @RequestParam(required = false, defaultValue = "false") Boolean submitted,
@@ -57,8 +64,17 @@ public class OrderController {
         }
     }
 
+    /**
+     * processes a submitted order via a POST method (does not process any request with a GET method)
+     * @param model is processed by Thymeleaf in the view
+     * @param customer is set by the submitting form
+     * @param product is set by the submitting form
+     * @return a redirection to order with set parameters according to the success of the submit
+     */
     @RequestMapping(value = "/submitorder", method = RequestMethod.POST)
     public String submitOrder (Model model, Customer customer, Product product) {
+        if (customer == null || product == null) return "redirect:/order?submitted=true&success=false";
+
         System.out.println(customer.toString());
         System.out.println(product.toString());
         return "redirect:/order?submitted=true&success=true";
