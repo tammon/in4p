@@ -29,16 +29,23 @@ public class Product extends AbstractDocument {
 
     private String productName;
 
-    // Product ID that is referenced by the QR Code
+    /**
+     * Product ID that is referenced by the QR Code
+     * Does not have to be necessarily the same like the productionId although in most cases they will match
+     */
     private String externalProductId;
 
     private String productType;
 
-    // ID and Position that is used during the production process
+    /**
+     * ID and Position that is used during the production process
+     */
     private String productionId;
     private String productionIdPos;
 
-    // Assigned production parameter
+    /**
+     * A list of assigned production parameters
+     */
     private List<ProductionParameter> productionParameters;
 
     public Product() {
@@ -62,8 +69,7 @@ public class Product extends AbstractDocument {
     }
 
     /**
-     * Set the {@link Product} ID
-     * @param productionId new {@link Product}
+     * Get the {@link Product} ID
      */
     public String getProductionId() {
         return productionId;
