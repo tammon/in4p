@@ -39,7 +39,7 @@ public class OrderController {
 
         // in case order was submitted and the order process was successful
         if(submitted && success){
-            model.addAttribute("container", "order");
+            model.addAttribute("container", "order-success");
             model.addAttribute("title", "Bestellung erfolgreich");
             return "template";
         } else {
