@@ -44,9 +44,9 @@
 }
 
 @-webkit-keyframes intro-img {
-    0% {transform: scale(0.5, 0.5); opacity: 0.0;}
-    50% {transform: scale(1.5, 1.5); opacity: 1.0;}
-    100% {transform: scale(2.5, 2.5); opacity: 0;}
+    0% {-webkit-transform: scale(0.5, 0.5); opacity: 0.0;}
+    50% {-webkit-transform: scale(1.5, 1.5); opacity: 1.0;}
+    100% {-webkit-transform: scale(2.5, 2.5); opacity: 0;}
 }
 
 @keyframes intro-img {
@@ -62,9 +62,9 @@
 }
 
 @-webkit-keyframes intro-bg {
-    0% {opacity: 1;z-index: 11111;}
-    70% {opacity: 1;z-index: 11111;}
-    100% {opacity: 0;z-index: 11111;}
+    0% {-webkit-opacity: 1;z-index: 11111;}
+    70% {-webkit-opacity: 1;z-index: 11111;}
+    100% {-webkit-opacity: 0;z-index: 11111;}
 }
 
 #intro-container:before {
