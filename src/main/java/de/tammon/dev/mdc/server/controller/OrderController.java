@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by tammschw on 12/05/15.
@@ -32,18 +33,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OrderController {
 
     @RequestMapping("/order")
-    public String order (Model model) {
-        model.addAttribute("container", "order");
-        model.addAttribute("title", "Bestellen Sie Ihre Taschenlampe");
-        return "template";
+    public String order (Model model,
+                         @RequestParam(required = false, defaultValue = "false") Boolean submitted,
+                         @RequestParam(required = false, defaultValue = "false") Boolean success) {
+
+        // in case order was submitted and the order process was successful
+        if(submitted && success){
+            model.addAttribute("container", "order");
+            model.addAttribute("title", "Bestellung erfolgreich");
+            return "template";
+        } else {
+            // in case order was submitted but the order process was not successful
+            if (submitted && !success){
+                model.addAttribute("container", "order");
+                model.addAttribute("title", "Bestellung fehlgeschlagen");
+                return "template";
+            } else {
+                // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
+                model.addAttribute("container", "order");
+                model.addAttribute("title", "Bestellen Sie Ihre Taschenlampe");
+                return "template";
+            }
+        }
     }
 
     @RequestMapping(value = "/submitorder", method = RequestMethod.POST)
     public String submitOrder (Model model, Customer customer, Product product) {
         System.out.println(customer.toString());
         System.out.println(product.toString());
-        model.addAttribute("container", "order");
-        model.addAttribute("title", "Bestellen Sie Ihre Taschenlampe");
-        return "template";
+        return "redirect:/order?submitted=true&success=true";
     }
 }
