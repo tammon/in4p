@@ -10,7 +10,10 @@
        <!-- **************************************************************** -->
        <!--  SPRING ANNOTATION PROCESSING                                    -->
        <!-- **************************************************************** -->
-       <context:component-scan base-package="de.tammon.dev.mdc.server.controller"/>
+       <context:component-scan base-package="de.tammon.dev.mdc.server">
+              <!-- Excludes all Repositories. They are handled by mongo:repositories. Prevents double bean definition -->
+              <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+       </context:component-scan>
 
        <!-- Import Thymeleaf config-->
        <import resource="classpath:configuration/thymeleaf-config.xml"/>
