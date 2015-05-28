@@ -7,6 +7,11 @@
 
        <context:property-placeholder location="classpath:configuration/properties/database.properties"/>
 
+       <!-- **************************************************************** -->
+       <!--  SPRING ANNOTATION PROCESSING                                    -->
+       <!-- **************************************************************** -->
+       <context:component-scan base-package="de.tammon.dev.mdc.server.controller"/>
+
        <!-- Import Thymeleaf config-->
        <import resource="classpath:configuration/thymeleaf-config.xml"/>
 
@@ -15,10 +20,5 @@
 
        <!-- Import Database configuration -->
        <import resource="classpath:configuration/database-config.xml"/>
-
-       <!-- **************************************************************** -->
-       <!--  SPRING ANNOTATION PROCESSING                                    -->
-       <!-- **************************************************************** -->
-       <context:component-scan base-package="de.tammon.dev.mdc.server"/>
 
 </beans>

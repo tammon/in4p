@@ -21,6 +21,8 @@
        xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
+    <mongo:repositories base-package="de.tammon.dev.mdc.server.model"/>
+
     <mongo:db-factory id="mongoDbFactory"
                       host="${db.host}"
                       port="${db.port}"
