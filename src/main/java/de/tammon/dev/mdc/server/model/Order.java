@@ -31,10 +31,10 @@ public class Order extends AbstractDocument {
 
     private String orderId;
 
-    @DBRef
+    @DBRef (lazy = true)
     private Customer customer;
 
-    @DBRef
+    @DBRef (lazy = true)
     private List<Product> products = new ArrayList<>();
 
 
