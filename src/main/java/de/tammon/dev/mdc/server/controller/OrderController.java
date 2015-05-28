@@ -18,7 +18,6 @@
 package de.tammon.dev.mdc.server.controller;
 
 import de.tammon.dev.mdc.server.model.Customer;
-import de.tammon.dev.mdc.server.model.Order;
 import de.tammon.dev.mdc.server.model.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,18 +47,18 @@ public class OrderController {
         if(submitted && success){
             model.addAttribute("container", "order-success");
             model.addAttribute("title", "Bestellung erfolgreich");
-            return "template";
+            return "index";
         } else {
             // in case order was submitted but the order process was not successful
             if (submitted && !success){
                 model.addAttribute("container", "order");
                 model.addAttribute("title", "Bestellung fehlgeschlagen");
-                return "template";
+                return "index";
             } else {
                 // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
                 model.addAttribute("container", "order");
                 model.addAttribute("title", "Bestellen Sie Ihre Taschenlampe");
-                return "template";
+                return "index";
             }
         }
     }

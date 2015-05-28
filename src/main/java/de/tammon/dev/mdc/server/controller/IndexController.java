@@ -31,6 +31,6 @@ public class IndexController {
     public String welcome(Model model) {
         model.addAttribute("container", "index");
         model.addAttribute("title", "Startseite");
-        return "template";
+        return "index";
     }
 }
