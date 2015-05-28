@@ -15,22 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.controller;
+package de.tammon.dev.mdc.server.service;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import de.tammon.dev.mdc.server.model.Order;
+import de.tammon.dev.mdc.server.model.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 28/05/15.
  */
-@Controller
-public class IndexController {
+@Service
+public class OrderService {
 
-    @RequestMapping("/")
-    public String welcome(Model model) {
-        model.addAttribute("container", "index");
-        model.addAttribute("title", "Startseite");
-        return "index";
+    @Autowired
+    private OrderRepository orderRepository;
+
+    public void save(Order order) {
+        orderRepository.save(order);
+    }
+
+    public Order getOrderByObjectId(String orderObjectId) {
+        return orderRepository.findOne(orderObjectId);
     }
 }

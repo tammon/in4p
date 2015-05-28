@@ -15,22 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.controller;
+package de.tammon.dev.mdc.server.service;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import de.tammon.dev.mdc.server.model.Product;
+import de.tammon.dev.mdc.server.model.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 28/05/15.
  */
-@Controller
-public class IndexController {
+@Service
+public class ProductService {
 
-    @RequestMapping("/")
-    public String welcome(Model model) {
-        model.addAttribute("container", "index");
-        model.addAttribute("title", "Startseite");
-        return "index";
+    @Autowired
+    ProductRepository productRepository;
+
+    public void save(Product product) {
+        productRepository.save(product);
     }
+
+    public Product getProductByName(String productName) {
+        return productRepository.getByProductName(productName);
+    }
+
+    public Product getProductByObjectId(String productObjectId) {
+        return productRepository.findOne(productObjectId);
+    }
+
 }

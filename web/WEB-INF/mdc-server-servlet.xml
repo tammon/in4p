@@ -5,15 +5,23 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-       <!-- Import Thymeleaf config-->
-       <import resource="configuration/thymeleaf-config.xml"/>
-
-       <!-- Import MVC config-->
-       <import resource="configuration/mvc-config.xml"/>
+       <context:property-placeholder location="classpath:configuration/properties/database.properties"/>
 
        <!-- **************************************************************** -->
        <!--  SPRING ANNOTATION PROCESSING                                    -->
        <!-- **************************************************************** -->
-       <context:component-scan base-package="de.tammon.dev.mdc.server"/>
+       <context:component-scan base-package="de.tammon.dev.mdc.server">
+              <!-- Excludes all Repositories. They are handled by mongo:repositories. Prevents double bean definition -->
+              <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+       </context:component-scan>
+
+       <!-- Import Thymeleaf config-->
+       <import resource="classpath:configuration/thymeleaf-config.xml"/>
+
+       <!-- Import MVC config-->
+       <import resource="classpath:configuration/mvc-config.xml"/>
+
+       <!-- Import Database configuration -->
+       <import resource="classpath:configuration/database-config.xml"/>
 
 </beans>

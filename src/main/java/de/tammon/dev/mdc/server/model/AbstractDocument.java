@@ -26,14 +26,14 @@ import java.math.BigInteger;
  */
 public class AbstractDocument {
     @Id
-    private BigInteger id;
+    private String id;
 
     /**
      * Returns the identifier of the document.
      *
      * @return the id
      */
-    public BigInteger getId() {
+    public String getId() {
         return id;
     }
 

@@ -32,6 +32,6 @@ public class ProductController {
     public String product(Model model) {
         model.addAttribute("container", "product");
         model.addAttribute("title", "Ihre Produktdaten");
-        return "template";
+        return "index";
     }
 }
