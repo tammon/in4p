@@ -27,7 +27,14 @@
 
 <div class="container">
   <section>
-    <h1>Hallo Herr Mustermann! <small>Produktionsdatenübersicht Ihrer Taschenlampe</small></h1>
+    <h1>
+        <span th:if="${customer != null}">Hallo
+          <span th:if="${customerTitle}"></span>
+        <span th:text="${customer.lastName}"></span>!
+      </span>
+      <span th:if="${customer == null}">Herzlich Willkommen!</span>
+      <small>Produktionsdatenübersicht</small>
+    </h1>
     <div class="row">
       <div class="col-md-8">
         <div class="panel panel-default">
@@ -51,31 +58,22 @@
       <div class="col-md-4">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3>Ihre <span th:text="${application}">Taschenlampe</span></h3>
-          </div>
-          <div class="panel-body">
-            Hier sind allgemeine Informationen
+            <h3>Ihr DHBW-Mosbach Produkt</h3>
           </div>
           <table class="table table-striped">
             <tr>
-              <th>Datenname</th>
-              <th>Wert</th>
+              <th>Produktname</th>
+              <td th:text="${product.productName}">Wert 1</td>
             </tr>
             <tr>
-              <td>Beispiel 1</td>
-              <td>Wert 1</td>
+              <th>Produktionsnummer</th>
+              <td th:text="${product.productionId}" th:if="${product.productionId != null}">Wert 2</td>
+              <td th:if="${product.productionId == null}">[Noch nicht zugwiesen]</td>
             </tr>
             <tr>
-              <td>Beispiel 2</td>
-              <td>Wert 2</td>
-            </tr>
-            <tr>
-              <td>Beispiel 3</td>
-              <td>Wert 3</td>
-            </tr>
-            <tr>
-              <td>Beispiel 3</td>
-              <td>Wert 3</td>
+              <th>Position</th>
+              <td th:text="${product.productionIdPos}" th:if="${product.productionId != null}">Wert 3</td>
+              <td th:if="${product.productionId == null}">[Noch nicht zugwiesen]</td>
             </tr>
           </table>
         </div>
@@ -90,9 +88,6 @@
         <div id="product-information" class="panel panel-default">
           <div class="panel-heading">
             <h3>Produktionsdaten</h3>
-          </div>
-          <div class="panel-body">
-            <p>Hier sind Ihre Produktinformationen</p>
           </div>
           <table class="table table-striped">
             <tr>
@@ -125,29 +120,25 @@
           <div class="panel-heading">
             <h3>Kundeninformationen</h3>
           </div>
-          <div class="panel-body">
-            <p>Hier sind Ihre Kundeninformationen</p>
+          <div class="panel-body" th:if="${customer == null}">
+            <p>Leider liegen uns keine Kundeninformationen zu diesem Auftrag vor!</p>
           </div>
-          <table class="table table-striped">
+          <table class="table table-striped" th:if="${customer != null}">
             <tr>
-              <th>Datenname</th>
-              <th>Wert</th>
+              <th>Anrede</th>
+              <td th:text="${customerTitle}">Wert 1</td>
             </tr>
             <tr>
-              <td>Beispiel 1</td>
-              <td>Wert 1</td>
+              <th>Vorname</th>
+              <td th:text="${customer.firstName}">Wert 2</td>
             </tr>
             <tr>
-              <td>Beispiel 2</td>
-              <td>Wert 2</td>
+              <th>Nachname</th>
+              <td th:text="${customer.lastName}">Wert 3</td>
             </tr>
-            <tr>
-              <td>Beispiel 3</td>
-              <td>Wert 3</td>
-            </tr>
-            <tr>
-              <td>Beispiel 3</td>
-              <td>Wert 3</td>
+            <tr th:if="${customer.email != null}">
+              <th>E-Mail</th>
+              <td th:text="${customer.email}">Wert 3</td>
             </tr>
           </table>
         </div>
@@ -158,7 +149,7 @@
   </section>
 </div>
 
-<div th:replace="fragments/intro :: intro"></div>
+<!--<div th:replace="fragments/intro :: intro"></div>-->
 
 </body>
 </html>

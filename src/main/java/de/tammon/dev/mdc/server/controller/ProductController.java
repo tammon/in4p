@@ -17,7 +17,11 @@
 
 package de.tammon.dev.mdc.server.controller;
 
+import de.tammon.dev.mdc.server.model.Customer;
+import de.tammon.dev.mdc.server.model.Order;
 import de.tammon.dev.mdc.server.model.Product;
+import de.tammon.dev.mdc.server.service.CustomerService;
+import de.tammon.dev.mdc.server.service.OrderService;
 import de.tammon.dev.mdc.server.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,14 +37,32 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    CustomerService customerService;
+
 
     @RequestMapping(value = {"/product","/fim"}, method = RequestMethod.GET)
     public String servePageProduct(Model model, String id) {
-        Product product = null;
-        if (id != null) product = productService.getProductByExternalProductId(id);
-        if (product == null || id == null) product = getExampleProduct();
-        model.addAttribute("product", product);
+        Product product;
+
+        if (id != null && (product = productService.getProductByExternalProductId(id)) != null) {
+            Order order;
+            Customer customer;
+
+            // Get order and customer from database selected by containing product
+            // add them to model if they were found in database
+            if ((order = orderService.getOrderByContainingProduct(product)) != null) model.addAttribute(order);
+            if ((customer = order.getCustomer()) != null) {
+                model.addAttribute(customer);
+                model.addAttribute("customerTitle", getCustomerTitle(customer));
+            }
+        } else product = getExampleProduct();
+
+        model.addAttribute(product);
         model.addAttribute("title", "Ihre Produktdaten");
+
         return "product";
     }
 
@@ -49,5 +71,13 @@ public class ProductController {
         product.setProductName("Taschenlampe");
         product.setProductType("1");
         return product;
+    }
+
+    private String getCustomerTitle(Customer customer) {
+        switch (customer.getGender()) {
+            case MALE: return "Herr";
+            case FEMALE: return "Frau";
+            default: return null;
+        }
     }
 }
