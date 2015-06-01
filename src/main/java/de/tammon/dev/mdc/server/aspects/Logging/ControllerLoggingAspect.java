@@ -17,8 +17,12 @@
 
 package de.tammon.dev.mdc.server.aspects.Logging;
 
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 /**
  * Created by tammschw on 01/06/15.
@@ -27,4 +31,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class ControllerLoggingAspect {
 
+    private Logger logger;
+
+    /**
+     * ASPECT
+     * Declares pointcut to all controller methods that serve Thymeleaf pages
+     * @param model {@link Model} that is parsed to Thymeleaf
+     */
+    @Pointcut("execution(String de.tammon.dev.mdc.server.controller..*.servePage*(..)) && args(model)")
+    public void servePage(Model model) {}
+
+
+    /**
+     * ASPECT
+     * Logs all important parameters that are parsed to Thymeleaf by the servePage controller methods
+     * @param joinPoint servePage controller method join
+     * @param model {@link Model} that is parsed to Thymeleaf
+     * @param result return value of joinPoint
+     */
+    @AfterReturning(pointcut = "servePage(model)", returning = "result")
+    public void afterReturningServePage(JoinPoint joinPoint, Model model, String result) {
+        logger = LoggerFactory.getLogger(joinPoint.getTarget().getClass());
+        logger.debug("Parsing template '" + result + "' with the model attributes " + model.toString() + " to Thymeleaf");
+    }
 }

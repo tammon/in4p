@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProductController {
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public String product(Model model) {
+    public String servePageProduct(Model model) {
         model.addAttribute("container", "product");
         model.addAttribute("title", "Ihre Produktdaten");
         return "index";
