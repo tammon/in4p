@@ -24,7 +24,7 @@ import java.math.BigInteger;
 /**
  * Created by tammschw on 13/04/15.
  */
-public class AbstractDocument {
+public abstract class AbstractDocument {
     @Id
     private String id;
 
