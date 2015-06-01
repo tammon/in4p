@@ -20,7 +20,7 @@ package de.tammon.dev.mdc.server.model;
 /**
  * Created by tammschw on 13/04/15.
  */
-public abstract class ProductionParameter {
+public abstract class AbstractProductionParameter {
 
     private String name;
     private String unit;
