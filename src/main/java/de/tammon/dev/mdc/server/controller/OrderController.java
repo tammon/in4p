@@ -39,7 +39,7 @@ public class OrderController {
      * @return the view "template" with the right attributes in the model according to the Request Parameters
      */
     @RequestMapping("/order")
-    public String order (Model model,
+    public String servePageOrder (Model model,
                          @RequestParam(required = false, defaultValue = "false") Boolean submitted,
                          @RequestParam(required = false, defaultValue = "false") Boolean success) {
 

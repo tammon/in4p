@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping("/")
-    public String welcome(Model model) {
+    public String servePageIndex(Model model) {
         model.addAttribute("container", "index");
         model.addAttribute("title", "Startseite");
         return "index";
