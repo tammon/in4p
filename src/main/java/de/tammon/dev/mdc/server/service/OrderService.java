@@ -19,6 +19,7 @@ package de.tammon.dev.mdc.server.service;
 
 import de.tammon.dev.mdc.server.model.Order;
 import de.tammon.dev.mdc.server.model.OrderRepository;
+import de.tammon.dev.mdc.server.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,9 @@ public class OrderService {
 
     public Order getOrderByObjectId(String orderObjectId) {
         return orderRepository.findOne(orderObjectId);
+    }
+
+    public Order getOrderByContainingProduct (Product product) {
+        return orderRepository.findByProductsContaining(product);
     }
 }
