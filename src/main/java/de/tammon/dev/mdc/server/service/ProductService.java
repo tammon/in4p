@@ -43,4 +43,9 @@ public class ProductService {
         return productRepository.findOne(productObjectId);
     }
 
+    public Product getProductByExternalProductId (String id) {
+        Product product = productRepository.getByExternalProductId(id);
+        return product;
+    }
+
 }

@@ -27,4 +27,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
     public Product getByProductName(String productName);
+
+    public Product getByExternalProductId(String externalProductId);
 }
