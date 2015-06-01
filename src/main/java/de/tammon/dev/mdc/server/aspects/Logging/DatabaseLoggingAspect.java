@@ -56,7 +56,9 @@ public class DatabaseLoggingAspect extends AbstractLogger{
                 + ": Tried to get object of "
                 + ((MethodSignature)joinPoint.getSignature()).getReturnType().toString()
                 + " from database by the provided Parameters "
-                + (new String(Arrays.stream(Arrays.copyOf(joinPoint.getArgs(), joinPoint.getArgs().length, String[].class)).collect(Collectors.joining(" ")))));
+                + (new String(Arrays
+                    .stream(Arrays.copyOf(joinPoint.getArgs(), joinPoint.getArgs().length, String[].class))
+                    .collect(Collectors.joining(" ")))));
         if (result == null) logger.error(joinPoint.getSignature().toShortString() + ": Didn't find requested object! Sorry...");
         else logger.debug(joinPoint.getSignature().toShortString() + ": Found the requested object " + result.toString());
     }
