@@ -91,6 +91,46 @@ public class Product extends AbstractDocument {
         return externalProductId;
     }
 
+    /**
+     * Set the externalProductId that is reverenced by the QR Code
+     * @param externalProductId QR Code Id reference
+     */
+    public void setExternalProductId(String externalProductId) {
+        this.externalProductId = externalProductId;
+    }
+
+    /**
+     * Set the productionId of the product in the MES
+     * @param productionId MES productionId
+     */
+    public void setProductionId(String productionId) {
+        this.productionId = productionId;
+    }
+
+    /**
+     * Set the position number of the production identification number in the MES
+     * @param productionIdPos position number of production in MES
+     */
+    public void setProductionIdPos(String productionIdPos) {
+        this.productionIdPos = productionIdPos;
+    }
+
+    /**
+     * Add a production parameter to the product
+     * @param productionParameter production parameter of the product
+     */
+    public void addProductionParameter(ProductionParameter productionParameter) {
+        this.productionParameters.add(productionParameter);
+    }
+
+    /**
+     * Adds a list of production parameters to the product
+     * @param productionParameters List of production parameters of the product
+     */
+    public void addListOfProductionParameters(List<ProductionParameter> productionParameters) {
+        this.productionParameters.addAll(productionParameters);
+    }
+
     @Override
     public String toString() {
         return "Product{" +
