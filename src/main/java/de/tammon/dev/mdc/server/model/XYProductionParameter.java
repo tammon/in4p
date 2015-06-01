@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * Created by tammschw on 01/06/15.
  */
-public class XYProductionParameter {
+public class XYProductionParameter extends AbstractProductionParameter {
 
     private Map<String, Double> xyParameterSet;
 
@@ -33,5 +33,9 @@ public class XYProductionParameter {
      */
     public void addParameter(String key, Double value) {
         xyParameterSet.put(key, value);
+    }
+
+    public Map<String, Double> getXyParameterSet() {
+        return xyParameterSet;
     }
 }

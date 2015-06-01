@@ -20,7 +20,7 @@ package de.tammon.dev.mdc.server.model;
 /**
  * Created by tammschw on 01/06/15.
  */
-public class SimpleProductionParameter extends ProductionParameter {
+public class SimpleProductionParameter extends AbstractProductionParameter {
     private double value;
 
     public double getValue() {
