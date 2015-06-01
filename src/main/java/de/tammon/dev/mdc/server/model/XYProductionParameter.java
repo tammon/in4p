@@ -17,27 +17,21 @@
 
 package de.tammon.dev.mdc.server.model;
 
+import java.util.Map;
+
 /**
- * Created by tammschw on 13/04/15.
+ * Created by tammschw on 01/06/15.
  */
-public abstract class ProductionParameter {
+public class XYProductionParameter {
 
-    private String name;
-    private String unit;
+    private Map<String, Double> xyParameterSet;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
+    /**
+     * Adds a new key - value pair to the parameterSet
+     * @param key unique x-axis value (e.g. time)
+     * @param value y-axis value (e.g. pressure)
+     */
+    public void addParameter(String key, Double value) {
+        xyParameterSet.put(key, value);
     }
 }

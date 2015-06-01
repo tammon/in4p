@@ -18,26 +18,16 @@
 package de.tammon.dev.mdc.server.model;
 
 /**
- * Created by tammschw on 13/04/15.
+ * Created by tammschw on 01/06/15.
  */
-public abstract class ProductionParameter {
+public class SimpleProductionParameter extends ProductionParameter {
+    private double value;
 
-    private String name;
-    private String unit;
-
-    public String getName() {
-        return name;
+    public double getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setValue(double value) {
+        this.value = value;
     }
 }
