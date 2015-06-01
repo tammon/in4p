@@ -19,6 +19,7 @@ package de.tammon.dev.mdc.server.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ import java.util.List;
 @Component
 public class Product extends AbstractDocument {
 
+    @NotNull
     private String productName;
 
     /**
@@ -35,6 +37,7 @@ public class Product extends AbstractDocument {
      */
     private String externalProductId;
 
+    @NotNull
     private String productType;
 
     /**
@@ -129,6 +132,18 @@ public class Product extends AbstractDocument {
      */
     public void addListOfProductionParameters(List<ProductionParameter> productionParameters) {
         this.productionParameters.addAll(productionParameters);
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductionIdPos() {
+        return productionIdPos;
+    }
+
+    public List<ProductionParameter> getProductionParameters() {
+        return productionParameters;
     }
 
     @Override
