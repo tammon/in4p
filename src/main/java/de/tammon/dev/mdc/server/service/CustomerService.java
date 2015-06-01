@@ -32,7 +32,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    private void save(Customer customer) {
+    public void save(Customer customer) {
         customerRepository.save(customer);
     }
 
