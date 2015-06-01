@@ -47,9 +47,14 @@ public class Product extends AbstractDocument {
     private String productionIdPos;
 
     /**
-     * A list of assigned production parameters
+     * A list of assigned simple production parameters
      */
-    private List<ProductionParameter> productionParameters;
+    private List<SimpleProductionParameter> simpleProductionParameters;
+
+    /**
+     * A list of assigned X-Y production parameter sets
+     */
+    private List<XYProductionParameter> xyProductionParameters;
 
     public Product() {
     }
@@ -119,19 +124,35 @@ public class Product extends AbstractDocument {
     }
 
     /**
-     * Add a production parameter to the product
-     * @param productionParameter production parameter of the product
+     * Adds a simple production parameter to the product
+     * @param simpleProductionParameter simple production parameter of the product
      */
-    public void addProductionParameter(ProductionParameter productionParameter) {
-        this.productionParameters.add(productionParameter);
+    public void addSimpleProductionParameter(SimpleProductionParameter simpleProductionParameter) {
+        this.simpleProductionParameters.add(simpleProductionParameter);
     }
 
     /**
-     * Adds a list of production parameters to the product
-     * @param productionParameters List of production parameters of the product
+     * Adds a list of simple production parameters to the product
+     * @param simpleProductionParameters List of simple production parameters of the product
      */
-    public void addListOfProductionParameters(List<ProductionParameter> productionParameters) {
-        this.productionParameters.addAll(productionParameters);
+    public void addListOfSimpleProductionParameters(List<SimpleProductionParameter> simpleProductionParameters) {
+        this.simpleProductionParameters.addAll(simpleProductionParameters);
+    }
+
+    /**
+     * Adds a list of X-Y production parameters to the product
+     * @param xyProductionParameters List of X-Y production parameters of the product
+     */
+    public void addListOfXyProductionParameters(List<XYProductionParameter> xyProductionParameters) {
+        this.xyProductionParameters.addAll(xyProductionParameters);
+    }
+
+    /**
+     * Adds a single X-Y production parameters to the product
+     * @param xyProductionParameter X-Y production parameter of the product
+     */
+    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
+        this.xyProductionParameters.add(xyProductionParameter);
     }
 
     public String getProductName() {
@@ -142,8 +163,12 @@ public class Product extends AbstractDocument {
         return productionIdPos;
     }
 
-    public List<ProductionParameter> getProductionParameters() {
-        return productionParameters;
+    public List<SimpleProductionParameter> getSimpleProductionParameters() {
+        return simpleProductionParameters;
+    }
+
+    public List<XYProductionParameter> getXyProductionParameters() {
+        return xyProductionParameters;
     }
 
     @Override
@@ -154,7 +179,8 @@ public class Product extends AbstractDocument {
                 ", productType='" + productType + '\'' +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
-                ", productionParameters=" + productionParameters +
+                ", simpleProductionParameters=" + simpleProductionParameters +
+                ", xyProductionParameters=" + xyProductionParameters +
                 '}';
     }
 }

@@ -89,26 +89,19 @@
           <div class="panel-heading">
             <h3>Produktionsdaten</h3>
           </div>
-          <table class="table table-striped">
+          <div class="panel-body" th:if="${product.simpleProductionParameters == null}">
+            <span th:if="${product.productionId == null}">Leider sind keine Produktionsparameter für diesen Auftrag vorhanden, da dieser scheinbar noch nicht produziert wurde</span>
+            <span th:if="${product.productionId != null}">Leider sind keine Produktionsparameter für diesen Auftrag vorhanden. Eventuell wird der Datensatz gerade aktualisiert. Versuchen Sie es später noch einmal.</span>
+          </div>
+          <table class="table table-striped" th:if="${product.simpleProductionParameters != null}">
             <tr>
               <th>Datenname</th>
               <th>Wert</th>
             </tr>
-            <tr>
-              <td>Beispiel 1</td>
-              <td>Wert 1</td>
-            </tr>
-            <tr>
-              <td>Beispiel 2</td>
-              <td>Wert 2</td>
-            </tr>
-            <tr>
-              <td>Beispiel 3</td>
-              <td>Wert 3</td>
-            </tr>
-            <tr>
-              <td>Beispiel 3</td>
-              <td>Wert 3</td>
+            <tr th:each="prodParam : ${product.simpleProductionParameters}">
+              <th th:text="${prodParam.name}">Beispiel 1</th>
+              <td th:text="${prodParam.value}">Wert 1</td>
+              <td th:text="${prodParam.unit}">Unit</td>
             </tr>
           </table>
         </div>
