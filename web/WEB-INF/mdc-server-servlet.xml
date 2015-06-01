@@ -24,4 +24,7 @@
        <!-- Import Database configuration -->
        <import resource="classpath:configuration/database-config.xml"/>
 
+       <!-- Import AOP configuration -->
+       <import resource="classpath:configuration/aop-config.xml"/>
+
 </beans>
