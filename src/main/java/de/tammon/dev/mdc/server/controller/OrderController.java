@@ -45,20 +45,17 @@ public class OrderController {
 
         // in case order was submitted and the order process was successful
         if(submitted && success){
-            model.addAttribute("container", "order-success");
             model.addAttribute("title", "Bestellung erfolgreich");
-            return "index";
+            return "order-success";
         } else {
             // in case order was submitted but the order process was not successful
             if (submitted && !success){
-                model.addAttribute("container", "order");
                 model.addAttribute("title", "Bestellung fehlgeschlagen");
-                return "index";
+                return "order";
             } else {
                 // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
-                model.addAttribute("container", "order");
                 model.addAttribute("title", "Bestellen Sie Ihre Taschenlampe");
-                return "index";
+                return "order";
             }
         }
     }

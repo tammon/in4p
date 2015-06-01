@@ -21,9 +21,9 @@
     <meta charset="UTF-8"/>
     <title>Wrapper Fragment</title>
 </head>
-<body th:fragment="wrapper (container)">
+<body>
 
-<nav class="navbar navbar-fixed-top navbar-default">
+<nav class="navbar navbar-fixed-top navbar-default" th:fragment="navbar">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -80,14 +80,5 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<div id="content-wrapper" class="container">
-    <section th:replace="__${'containers/' + container + '-container :: ' + container}__"></section>
-</div>
-
-
-<!--This is the intro of the page-->
-<div id="intro-container">
-    <img th:src="@{/static/images/DHBW_Logo.png}" src="../../resources/images/DHBW_Logo.png"/>
-</div>
 </body>
 </html>

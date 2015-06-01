@@ -17,26 +17,34 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<head lang="en" th:replace="fragments/header :: header (${title})">
     <meta charset="UTF-8"/>
     <title></title>
 </head>
 <body>
-  <section th:fragment="order-success">
+
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container">
+  <section>
     <h1>Vielen Dank für Ihre Bestellung!</h1>
     <div class="row">
-    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">Bestellung war erfolgreich</h3>
-            </div>
-            <div class="panel-body">
-              <span class="col-md-12">Ihre Bestellung wurde erfolgreich im System erfasst und wird in kürze in die Produktion gehen</span>
-              <a class="btn btn-success btn-lg" href="order" th:href="@{/order}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück</a>
-            </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Bestellung war erfolgreich</h3>
           </div>
-    	</div>
+          <div class="panel-body">
+            <span class="col-md-12">Ihre Bestellung wurde erfolgreich im System erfasst und wird in kürze in die Produktion gehen</span>
+            <a class="btn btn-success btn-lg" href="order" th:href="@{/order}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+</div>
+
+<div th:replace="fragments/intro :: intro"></div>
+
 </body>
 </html>

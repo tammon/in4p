@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2015. Tammo Schwindt (Tammon) <dev@tammon.de>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="fragments/header :: header (${title})">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container">
+  <section>
+    <h1>Hallo Herr Mustermann! <small>Produktionsdatenübersicht Ihrer Taschenlampe</small></h1>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>Vielen Dank, dass Sie unsere Industrie 4.0 Anlage besucht haben. Wir haben für Sie im folgenden alle Daten bereitgestellt,
+              die im Zuge der Ferigung Ihrer persönlichen Taschenlampe erfasst wurden. Des Weiteren finden Sie auch die Kundendaten, die uns zum Zeitpunkt
+              der Produktion bekannt waren und in unserem System hinterlegt sind. Die hier angezeigten Produktionsdaten beziehen sich exakt auf die Taschenlampe,
+              die sie gerade in Ihrer Hand halten.
+            </p>
+            <p>
+              Dies ist ein Industrie 4.0 Projekt der DHBW Mosbach. Es soll Wege darlegen, Produktspezifische Daten während des Produktionsprozesses zu erfassen, zu speichern und
+              anschließend innerhalb des Wertschöpfungsprozesses wie aber auch vom Endkunden abrufen zu lassen. Diese Technologie ermöglicht es dem Kunden während und nach der Produktion
+              Daten über sein gekauftes Produkt abzurufen. Dies kann sowohl im Nachverfolgungsprozess als auch in Haftungsfragen sinnvoll sein. Der Hersteller kann aus der Masse der
+              produktspezifischen Daten mit Big Data Technologien Rückschlüsse auf Qualitäts- und Ausfallgrößen ziehen, um seine Prozesse zu optimieren und somit Ausfälle des Produktes
+              oder der Produktionsanlage zu vermeiden.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- general product information-->
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>Ihre <span th:text="${application}">Taschenlampe</span></h3>
+          </div>
+          <div class="panel-body">
+            Hier sind allgemeine Informationen
+          </div>
+          <table class="table table-striped">
+            <tr>
+              <th>Datenname</th>
+              <th>Wert</th>
+            </tr>
+            <tr>
+              <td>Beispiel 1</td>
+              <td>Wert 1</td>
+            </tr>
+            <tr>
+              <td>Beispiel 2</td>
+              <td>Wert 2</td>
+            </tr>
+            <tr>
+              <td>Beispiel 3</td>
+              <td>Wert 3</td>
+            </tr>
+            <tr>
+              <td>Beispiel 3</td>
+              <td>Wert 3</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- product data-->
+    <div class="row">
+
+      <div class="col-md-6">
+        <!-- production information panel-->
+        <div id="product-information" class="panel panel-default">
+          <div class="panel-heading">
+            <h3>Produktionsdaten</h3>
+          </div>
+          <div class="panel-body">
+            <p>Hier sind Ihre Produktinformationen</p>
+          </div>
+          <table class="table table-striped">
+            <tr>
+              <th>Datenname</th>
+              <th>Wert</th>
+            </tr>
+            <tr>
+              <td>Beispiel 1</td>
+              <td>Wert 1</td>
+            </tr>
+            <tr>
+              <td>Beispiel 2</td>
+              <td>Wert 2</td>
+            </tr>
+            <tr>
+              <td>Beispiel 3</td>
+              <td>Wert 3</td>
+            </tr>
+            <tr>
+              <td>Beispiel 3</td>
+              <td>Wert 3</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <!-- customer information panel-->
+        <div id="customer-information" class="panel panel-default">
+          <div class="panel-heading">
+            <h3>Kundeninformationen</h3>
+          </div>
+          <div class="panel-body">
+            <p>Hier sind Ihre Kundeninformationen</p>
+          </div>
+          <table class="table table-striped">
+            <tr>
+              <th>Datenname</th>
+              <th>Wert</th>
+            </tr>
+            <tr>
+              <td>Beispiel 1</td>
+              <td>Wert 1</td>
+            </tr>
+            <tr>
+              <td>Beispiel 2</td>
+              <td>Wert 2</td>
+            </tr>
+            <tr>
+              <td>Beispiel 3</td>
+              <td>Wert 3</td>
+            </tr>
+            <tr>
+              <td>Beispiel 3</td>
+              <td>Wert 3</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+</div>
+
+<div th:replace="fragments/intro :: intro"></div>
+
+</body>
+</html>

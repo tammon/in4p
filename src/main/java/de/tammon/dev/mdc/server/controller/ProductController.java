@@ -17,6 +17,9 @@
 
 package de.tammon.dev.mdc.server.controller;
 
+import de.tammon.dev.mdc.server.model.Product;
+import de.tammon.dev.mdc.server.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +31,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductController {
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public String servePageProduct(Model model) {
-        model.addAttribute("container", "product");
+    @Autowired
+    ProductService productService;
+
+    @RequestMapping(value = {"/product","/fim"}, method = RequestMethod.GET)
+    public String servePageProduct(Model model, String id) {
+        Product product = null;
+        if (id != null) product = productService.getProductByExternalProductId(id);
+        if (product == null || id == null) product = getExampleProduct();
+        model.addAttribute("product", product);
         model.addAttribute("title", "Ihre Produktdaten");
-        return "index";
+        return "product";
+    }
+
+    private Product getExampleProduct() {
+        Product product = new Product();
+        product.setProductName("Taschenlampe");
+        product.setProductType("1");
+        return product;
     }
 }
