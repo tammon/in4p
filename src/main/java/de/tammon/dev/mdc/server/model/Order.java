@@ -84,4 +84,17 @@ public class Order extends AbstractDocument {
     public List<Product> getProducts() {
         return products;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +
+                ", customer=" + customer +
+                ", products=" + products +
+                '}';
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
 }

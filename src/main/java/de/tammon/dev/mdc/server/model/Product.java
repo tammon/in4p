@@ -19,6 +19,7 @@ package de.tammon.dev.mdc.server.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ import java.util.List;
 @Component
 public class Product extends AbstractDocument {
 
+    @NotNull
     private String productName;
 
     /**
@@ -35,6 +37,7 @@ public class Product extends AbstractDocument {
      */
     private String externalProductId;
 
+    @NotNull
     private String productType;
 
     /**
@@ -44,9 +47,14 @@ public class Product extends AbstractDocument {
     private String productionIdPos;
 
     /**
-     * A list of assigned production parameters
+     * A list of assigned simple production parameters
      */
-    private List<ProductionParameter> productionParameters;
+    private List<SimpleProductionParameter> simpleProductionParameters;
+
+    /**
+     * A list of assigned X-Y production parameter sets
+     */
+    private List<XYProductionParameter> xyProductionParameters;
 
     public Product() {
     }
@@ -91,6 +99,78 @@ public class Product extends AbstractDocument {
         return externalProductId;
     }
 
+    /**
+     * Set the externalProductId that is reverenced by the QR Code
+     * @param externalProductId QR Code Id reference
+     */
+    public void setExternalProductId(String externalProductId) {
+        this.externalProductId = externalProductId;
+    }
+
+    /**
+     * Set the productionId of the product in the MES
+     * @param productionId MES productionId
+     */
+    public void setProductionId(String productionId) {
+        this.productionId = productionId;
+    }
+
+    /**
+     * Set the position number of the production identification number in the MES
+     * @param productionIdPos position number of production in MES
+     */
+    public void setProductionIdPos(String productionIdPos) {
+        this.productionIdPos = productionIdPos;
+    }
+
+    /**
+     * Adds a simple production parameter to the product
+     * @param simpleProductionParameter simple production parameter of the product
+     */
+    public void addSimpleProductionParameter(SimpleProductionParameter simpleProductionParameter) {
+        this.simpleProductionParameters.add(simpleProductionParameter);
+    }
+
+    /**
+     * Adds a list of simple production parameters to the product
+     * @param simpleProductionParameters List of simple production parameters of the product
+     */
+    public void addListOfSimpleProductionParameters(List<SimpleProductionParameter> simpleProductionParameters) {
+        this.simpleProductionParameters.addAll(simpleProductionParameters);
+    }
+
+    /**
+     * Adds a list of X-Y production parameters to the product
+     * @param xyProductionParameters List of X-Y production parameters of the product
+     */
+    public void addListOfXyProductionParameters(List<XYProductionParameter> xyProductionParameters) {
+        this.xyProductionParameters.addAll(xyProductionParameters);
+    }
+
+    /**
+     * Adds a single X-Y production parameters to the product
+     * @param xyProductionParameter X-Y production parameter of the product
+     */
+    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
+        this.xyProductionParameters.add(xyProductionParameter);
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductionIdPos() {
+        return productionIdPos;
+    }
+
+    public List<SimpleProductionParameter> getSimpleProductionParameters() {
+        return simpleProductionParameters;
+    }
+
+    public List<XYProductionParameter> getXyProductionParameters() {
+        return xyProductionParameters;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -99,7 +179,8 @@ public class Product extends AbstractDocument {
                 ", productType='" + productType + '\'' +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
-                ", productionParameters=" + productionParameters +
+                ", simpleProductionParameters=" + simpleProductionParameters +
+                ", xyProductionParameters=" + xyProductionParameters +
                 '}';
     }
 }

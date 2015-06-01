@@ -15,27 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.service;
+package de.tammon.dev.mdc.server.aspects.Logging;
 
-import de.tammon.dev.mdc.server.model.Order;
-import de.tammon.dev.mdc.server.model.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Created by tammschw on 28/05/15.
+ * Created by tammschw on 01/06/15.
  */
-@Service
-public class OrderService {
+public abstract class AbstractLogger {
+    protected Logger logger;
 
-    @Autowired
-    private OrderRepository orderRepository;
-
-    public void save(Order order) {
-        orderRepository.save(order);
-    }
-
-    public Order getOrderByObjectId(String orderObjectId) {
-        return orderRepository.findOne(orderObjectId);
+    protected Logger getLogger (Class c) {
+        return LoggerFactory.getLogger(c);
     }
 }

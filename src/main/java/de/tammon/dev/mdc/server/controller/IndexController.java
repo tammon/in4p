@@ -29,7 +29,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public String servePageIndex(Model model) {
-        model.addAttribute("container", "index");
         model.addAttribute("title", "Startseite");
         return "index";
     }

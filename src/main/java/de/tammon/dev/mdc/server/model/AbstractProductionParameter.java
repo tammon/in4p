@@ -15,32 +15,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.service;
-
-import de.tammon.dev.mdc.server.model.Product;
-import de.tammon.dev.mdc.server.model.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package de.tammon.dev.mdc.server.model;
 
 /**
- * Created by tammschw on 28/05/15.
+ * Created by tammschw on 13/04/15.
  */
-@Service
-public class ProductService {
+public abstract class AbstractProductionParameter {
 
-    @Autowired
-    ProductRepository productRepository;
+    private String name;
+    private String unit;
 
-    public void save(Product product) {
-        productRepository.save(product);
+    public String getName() {
+        return name;
     }
 
-    public Product getProductByName(String productName) {
-        return productRepository.getByProductName(productName);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Product getProductByObjectId(String productObjectId) {
-        return productRepository.findOne(productObjectId);
+    public String getUnit() {
+        return unit;
     }
 
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }

@@ -19,13 +19,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en" th:replace="fragments/header :: header (${title})">
     <meta charset="UTF-8"/>
-    <title>Testseite</title>
+    <title></title>
 </head>
+<body>
 
-<body th:replace="fragments/wrapper :: wrapper (${container})">
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
-Hallo Welt!
+<div class="container">
+    <section>
+        <h1>Das ist der Indexcontainer</h1>
+        Dieser dient vorerst nur zur Verdeutlichung der Thymeleaf Parameter Funktion!
+    </section>
+</div>
+
+<div th:replace="fragments/intro :: intro"></div>
 
 </body>
-
 </html>

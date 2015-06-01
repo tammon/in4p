@@ -17,28 +17,32 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<head lang="en" th:replace="fragments/header :: header (${title})">
     <meta charset="UTF-8"/>
     <title>Ordercontainer</title>
 </head>
 <body>
-    <section th:fragment="order">
+
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container">
+    <section>
         <h1>Bestellen Sie Ihre DHBW-Taschenlampe <small>DHBW-Mosbach E-FIT Labor</small></h1>
         <div class="row">
-        	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-        		<div class="panel panel-default">
-        			<div class="panel-body">
-        			   Willkommen auf der Bestellseite für eine Taschenlampe des Labors für Evolutionäre-Fertigungs IT
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        Willkommen auf der Bestellseite für eine Taschenlampe des Labors für Evolutionäre-Fertigungs IT
                         (E-FIT) der Dualen Hochschule Baden-Württemberg Mosbach. Ihre Taschenlampe wird individuell für Sie gefertigt!
-        			</div>
-        		</div>
-        	</div>
+                    </div>
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3>Bestellung</h3>
                     </div>
-                	<div class="panel-body">
+                    <div class="panel-body">
                         <form action="submitorder" method="post" class="form-horizontal" role="form">
 
                             <!-- Enter Gender -->
@@ -98,10 +102,14 @@
                                 </div>
                             </div>
                         </form>
-                	</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+</div>
+
+<div th:replace="fragments/intro :: intro"></div>
+
 </body>
 </html>

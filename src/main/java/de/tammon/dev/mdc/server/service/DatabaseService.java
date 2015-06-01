@@ -17,12 +17,13 @@
 
 package de.tammon.dev.mdc.server.service;
 
-import de.tammon.dev.mdc.server.model.Customer;
-import de.tammon.dev.mdc.server.model.Order;
-import de.tammon.dev.mdc.server.model.Product;
+import de.tammon.dev.mdc.server.model.*;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by tammschw on 28/05/15.
@@ -32,8 +33,74 @@ public class DatabaseService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private ProductRepository productRepository;
+
+
+    /*
+    GENERAL DATABASE FUNCTIONALITIES
+     */
+
     public void resetDb () {
 //        TODO: Exception Handling AOP
         mongoTemplate.getDb().dropDatabase();
+    }
+
+    public void save(Object object) {
+        if (object instanceof Order) orderRepository.save((Order)object);
+        if (object instanceof Customer) customerRepository.save((Customer)object);
+        if (object instanceof Product) productRepository.save((Product)object);
+    }
+
+
+    /*
+    ORDER AREA
+     */
+
+    public Order getOrderByObjectId(String orderObjectId) {
+        return orderRepository.findOne(orderObjectId);
+    }
+
+    public Order getOrderByContainingProduct (Product product) {
+        return orderRepository.findByProductsContaining(product);
+    }
+
+
+    /*
+    PRODUCT AREA
+     */
+
+    public Product getProductByName(String productName) {
+        return productRepository.getByProductName(productName);
+    }
+
+    public Product getProductByObjectId(String productObjectId) {
+        return productRepository.findOne(productObjectId);
+    }
+
+    public Product getProductByExternalProductId (String id) {
+        Product product = productRepository.getByExternalProductId(id);
+        return product;
+    }
+
+
+    /*
+    CUSTOMER AREA
+     */
+
+    public Customer getCustomerByCustomerObjectId(String customerObjectId) {
+        return customerRepository.findOne(customerObjectId);
+    }
+
+    public Customer getCustomerByCustomerId(String customerId) {
+        return customerRepository.findByCustomerId(customerId);
+    }
+
+    public List<Customer> getListOfCustomersByLastName (String customerLastName) {
+        return customerRepository.findByLastName(customerLastName);
     }
 }

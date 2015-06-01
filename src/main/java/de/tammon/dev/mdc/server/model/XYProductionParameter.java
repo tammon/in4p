@@ -20,22 +20,11 @@ package de.tammon.dev.mdc.server.model;
 import java.util.Map;
 
 /**
- * Created by tammschw on 13/04/15.
+ * Created by tammschw on 01/06/15.
  */
-public class ProductionParameter {
+public class XYProductionParameter extends AbstractProductionParameter {
 
-    private String name;
-    private String unit;
-    private Map<String, Double> parameterSet;
-
-
-    /**
-     * creates a new {@link ProductionParameter} object with the given name.
-     * @param name Name of Parameter set must not be {@literal null}
-     */
-    public ProductionParameter(String name) {
-        this.name = name;
-    }
+    private Map<String, Double> xyParameterSet;
 
     /**
      * Adds a new key - value pair to the parameterSet
@@ -43,6 +32,10 @@ public class ProductionParameter {
      * @param value y-axis value (e.g. pressure)
      */
     public void addParameter(String key, Double value) {
-        parameterSet.put(key, value);
+        xyParameterSet.put(key, value);
+    }
+
+    public Map<String, Double> getXyParameterSet() {
+        return xyParameterSet;
     }
 }
