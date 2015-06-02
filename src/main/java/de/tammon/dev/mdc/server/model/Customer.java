@@ -85,6 +85,14 @@ public class Customer extends AbstractDocument {
         this.gender = gender;
     }
 
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
