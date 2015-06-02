@@ -18,7 +18,11 @@
 package de.tammon.dev.mdc.server.controller;
 
 import de.tammon.dev.mdc.server.model.Customer;
+import de.tammon.dev.mdc.server.model.Order;
 import de.tammon.dev.mdc.server.model.Product;
+import de.tammon.dev.mdc.server.service.DatabaseService;
+import de.tammon.dev.mdc.server.service.SAPService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +34,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class OrderController {
+
+    @Autowired
+    DatabaseService databaseService;
+    @Autowired
+    SAPService sapService;
 
     /**
      * processes the standard order view and the order success and fail page.
@@ -69,10 +78,17 @@ public class OrderController {
      */
     @RequestMapping(value = "/submitorder", method = RequestMethod.POST)
     public String submitOrder (Model model, Customer customer, Product product) {
-        if (customer == null || product == null) return "redirect:/order?submitted=true&success=false";
+        if(!databaseService.isDuplicateInDatabase(product)) {
 
-        System.out.println(customer.toString());
-        System.out.println(product.toString());
-        return "redirect:/order?submitted=true&success=true";
+            if (!databaseService.isDuplicateInDatabase(customer)) customer.setCustomerId(sapService.getCustomerId(customer));
+            else customer = databaseService.getCustomerByEmail(customer.getEmail());
+
+            Order order = new Order(customer,product);
+            order.setOrderId(sapService.getOrderId(order));
+
+            databaseService.save(customer, product, order);
+
+            return "redirect:/order?submitted=true&success=true";
+        } else return "redirect:/order?submitted=true&success=false";
     }
 }
