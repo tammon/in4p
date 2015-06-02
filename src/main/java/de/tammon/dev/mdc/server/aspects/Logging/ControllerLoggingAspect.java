@@ -33,25 +33,6 @@ import org.springframework.ui.Model;
 public class ControllerLoggingAspect extends AbstractLogger {
 
     /**
-     * Pointcut
-     * Declares pointcut to all controller methods that serve Thymeleaf pages
-     *
-     * @param model {@link Model} that is parsed to Thymeleaf
-     */
-    @Pointcut("execution(String de.tammon.dev.mdc.server.controller..*.servePage*(..)) && args(model)")
-    public void servePage(Model model) {
-    }
-
-    /**
-     * Pointcut
-     * Declares pointcut to product controller method that serve Thymeleaf page
-     *
-     * @param id external production ID referred by QR-Code
-     */
-    @Pointcut("execution(String de.tammon.dev.mdc.server.controller..*.servePageProduct(..)) && args(id)")
-    public void serveProductPage(String id) {}
-
-    /**
      * ASPECT
      * Logs all important parameters that are parsed to Thymeleaf by the servePage controller methods
      *
@@ -59,13 +40,13 @@ public class ControllerLoggingAspect extends AbstractLogger {
      * @param model     {@link Model} that is parsed to Thymeleaf
      * @param result    return value of joinPoint
      */
-    @AfterReturning(pointcut = "servePage(model)", returning = "result")
+    @AfterReturning(pointcut = "de.tammon.dev.mdc.server.aspects.Pointcuts.servePage(model)", returning = "result")
     public void afterReturningServePage(JoinPoint joinPoint, Model model, String result) {
         logger = getLogger(joinPoint.getTarget().getClass());
         logger.debug("Parsing template '" + result + "' with the model attributes " + model.toString() + " to Thymeleaf");
     }
 
-    @After("serveProductPage(id)")
+    @After("de.tammon.dev.mdc.server.aspects.Pointcuts.serveProductPage(id)")
     public void afterServingProductPage (JoinPoint joinPoint, String id) {
         if (id == null) logger.debug(joinPoint.getSignature().toShortString() + "says: No id (externalProductionId) provided to requestHandling product controller method. Serving example Product.");
         else logger.debug(joinPoint.getSignature().toShortString() + "says: Got an id (externalProductionId). Now trying to get the corresponding product from database.");
