@@ -30,4 +30,6 @@ public interface CustomerRepository extends MongoRepository<Customer, String> {
 
     List<Customer> findByLastName (String lastName);
     Customer findByCustomerId(String customerId);
+
+    Customer getByEmail(String Email);
 }

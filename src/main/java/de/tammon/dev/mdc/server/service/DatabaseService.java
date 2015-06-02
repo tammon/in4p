@@ -50,12 +50,44 @@ public class DatabaseService {
         mongoTemplate.getDb().dropDatabase();
     }
 
-    public void save(Object object) {
-        if (object instanceof Order) orderRepository.save((Order)object);
-        if (object instanceof Customer) customerRepository.save((Customer)object);
-        if (object instanceof Product) productRepository.save((Product)object);
+    public void save(Object... objects) {
+        for (Object object : objects) {
+            if (object instanceof Order) orderRepository.save((Order) object);
+            if (object instanceof Customer) customerRepository.save((Customer) object);
+            if (object instanceof Product) productRepository.save((Product) object);
+        }
     }
 
+    /**
+     * Check if the provided Object is already in database.
+     * @param objects will be checked if it is already stored in db
+     * @return returns true if it is a duplicate
+     */
+    public boolean isDuplicateInDatabase(Object... objects) {
+        boolean result = false;
+        for (Object object : objects) {
+            if (object instanceof Order) {
+                Order order = (Order) object;
+                if (getOrderByOrderId(order.getOrderId()) != null) result |= true;
+                else result |= false;
+            }
+            if (object instanceof Customer) {
+                Customer customer = (Customer) object;
+                if (getCustomerByEmail(customer.getEmail()) != null) result |= true;
+                else result |= false;
+            }
+            if (object instanceof Product) {
+                Product product = (Product) object;
+                if ( ((getProductByExternalProductId(product.getExternalProductId()) != null) && product.getExternalProductId() != null)
+                        || (getProductByProductionIdAndPosition(product.getProductionId(), product.getProductionIdPos()) != null)
+                            && product.getProductionId() != null
+                            && product.getProductionId() != null)
+                    result |= true;
+                else result |= false;
+            }
+        }
+        return result;
+    }
 
     /*
     ORDER AREA
@@ -67,6 +99,10 @@ public class DatabaseService {
 
     public Order getOrderByContainingProduct (Product product) {
         return orderRepository.findByProductsContaining(product);
+    }
+
+    public Order getOrderByOrderId (String orderId) {
+        return orderRepository.getByOrderId(orderId);
     }
 
 
@@ -87,6 +123,10 @@ public class DatabaseService {
         return product;
     }
 
+    public Product getProductByProductionIdAndPosition (String productionId, String position) {
+        return productRepository.getByProductionIdAndPosition(productionId, position);
+    }
+
 
     /*
     CUSTOMER AREA
@@ -102,5 +142,9 @@ public class DatabaseService {
 
     public List<Customer> getListOfCustomersByLastName (String customerLastName) {
         return customerRepository.findByLastName(customerLastName);
+    }
+
+    public Customer getCustomerByEmail(String Email) {
+        return customerRepository.getByEmail(Email);
     }
 }

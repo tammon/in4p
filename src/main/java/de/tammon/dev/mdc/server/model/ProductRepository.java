@@ -18,6 +18,7 @@
 package de.tammon.dev.mdc.server.model;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -26,7 +27,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
-    public Product getByProductName(String productName);
+    Product getByProductName(String productName);
 
-    public Product getByExternalProductId(String externalProductId);
+    Product getByExternalProductId(String externalProductId);
+
+    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
+    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
 }
