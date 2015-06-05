@@ -30,7 +30,7 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
-    <div class="alert alert-success" th:if="${pageSettings.orderSucceeded}" id="">
+    <div class="alert alert-success" th:if="${pageSettings.orderSucceeded}" id="orderSucceededAlert">
     	<button type="button" class="close" data-dismiss="alertSucceededAlert" aria-hidden="true">&times;</button>
     	<strong>Vielen Dank f&uuml;r Ihre Bestellung!</strong> Ihre Bestellung wurde erfolgreich im System erfasst und wird in k&uuml;rze in die Produktion gehen
     </div>
