@@ -19,15 +19,15 @@ package de.tammon.dev.mdc.server.controller;
 
 import de.tammon.dev.mdc.server.model.Customer;
 import de.tammon.dev.mdc.server.model.Order;
+import de.tammon.dev.mdc.server.model.PageSettings;
 import de.tammon.dev.mdc.server.model.Product;
 import de.tammon.dev.mdc.server.service.DatabaseService;
 import de.tammon.dev.mdc.server.service.SAPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by tammschw on 12/05/15.
@@ -39,56 +39,61 @@ public class OrderController {
     DatabaseService databaseService;
     @Autowired
     SAPService sapService;
+    @Autowired
+    PageSettings pageSettings;
 
     /**
      * processes the standard order view and the order success and fail page.
-     * @param model is processed by Thymeleaf in the view
-     * @param submitted Request Parameter that sets if a order was submitted before requesting this site
-     * @param success Request Parameter that sets if the order process of a previously submitted order was successful
      * @return the view "template" with the right attributes in the model according to the Request Parameters
      */
     @RequestMapping("/order")
-    public String servePageOrder (Model model,
-                         @RequestParam(required = false, defaultValue = "false") Boolean submitted,
-                         @RequestParam(required = false, defaultValue = "false") Boolean success) {
-
-        // in case order was submitted and the order process was successful
-        if(submitted && success){
-            model.addAttribute("title", "Bestellung erfolgreich");
-            return "order-success";
-        } else {
-            // in case order was submitted but the order process was not successful
-            if (submitted && !success){
-                model.addAttribute("title", "Bestellung fehlgeschlagen");
-                return "order";
-            } else {
-                // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
-                model.addAttribute("title", "Bestellen Sie Ihre Taschenlampe");
-                return "order";
-            }
-        }
+    public String servePageOrder () {
+        // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
+        pageSettings.clear();
+        pageSettings.setTitle("Bestellen Sie Ihre Taschenlampe");
+        return "order";
     }
 
     /**
      * processes a submitted order via a POST method (does not process any request with a GET method)
-     * @param model is processed by Thymeleaf in the view
      * @param customer is set by the submitting form
      * @param product is set by the submitting form
      * @return a redirection to order with set parameters according to the success of the submit
      */
     @RequestMapping(value = "/submitorder", method = RequestMethod.POST)
-    public String submitOrder (Model model, Customer customer, Product product) {
-        if(!databaseService.isDuplicateInDatabase(product)) {
+    public String submitOrder (Customer customer, Product product) {
+        pageSettings.clear();
 
-            if (!databaseService.isDuplicateInDatabase(customer)) customer.setCustomerId(sapService.getCustomerId(customer));
+        if(!databaseService.doExist(product)) {
+
+            if (!databaseService.doExist(customer)) customer.setCustomerId(sapService.getCustomerId(customer));
             else customer = databaseService.getCustomerByEmail(customer.getEmail());
 
             Order order = new Order(customer,product);
             order.setOrderId(sapService.getOrderId(order));
 
+            System.out.println(customer);
+
             databaseService.save(customer, product, order);
 
-            return "redirect:/order?submitted=true&success=true";
-        } else return "redirect:/order?submitted=true&success=false";
+            System.out.println(customer);
+
+            pageSettings.orderSucceeded();
+            pageSettings.setPageName("index");
+            pageSettings.setTitle("Bestellung erfolgreich");
+            pageSettings.doNotClearOnNextUse();
+
+            return "redirect:/";
+        } else {
+            pageSettings.setTitle("Bestellung fehlgeschlagen!");
+            pageSettings.orderFailed();
+            pageSettings.doNotClearOnNextUse();
+            return "redirect:/order";
+        }
+    }
+
+    @ModelAttribute("pageSettings")
+    public PageSettings getPageSettings() {
+        return pageSettings;
     }
 }

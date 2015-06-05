@@ -17,15 +17,22 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en" th:replace="fragments/header :: header (${title})">
+<head lang="en">
     <meta charset="UTF-8"/>
-    <title>Ordercontainer</title>
+
+    <th:block th:replace="fragments/header :: header(${pageSettings.title})"/>
+
+    <script src="../resources/js/order/order-failed-alert.js" th:src="@{/static/js/order/order-failed-alert.js}" th:if="${pageSettings.orderFailed == true}"></script>
 </head>
 <body>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
+    <div class="alert alert-danger" id="orderFailedAlert" th:if="${pageSettings.orderFailed == true}">
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    	<strong>Bestellung fehlgeschlagen</strong> Da ist etwas bei der internen Verarbeitung schief gelaufen. Versuche es sp&auml;ter noch einmal oder kontaktiere den Administrator
+    </div>
     <section>
         <h1>Bestellen Sie Ihre DHBW-Taschenlampe <small>DHBW-Mosbach E-FIT Labor</small></h1>
         <div class="row">

@@ -17,9 +17,10 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en" th:replace="fragments/header :: header (${title})">
+<head lang="en">
     <meta charset="UTF-8"/>
-    <title></title>
+    <th:block th:replace="fragments/header :: header(${pageSettings.title})"/>
+
 </head>
 <body>
 

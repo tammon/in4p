@@ -63,7 +63,7 @@ public class DatabaseService {
      * @param objects will be checked if it is already stored in db
      * @return returns true if it is a duplicate
      */
-    public boolean isDuplicateInDatabase(Object... objects) {
+    public boolean doExist(Object... objects) {
         boolean result = false;
         for (Object object : objects) {
             if (object instanceof Order) {
