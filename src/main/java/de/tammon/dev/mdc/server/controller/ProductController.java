@@ -19,7 +19,7 @@ package de.tammon.dev.mdc.server.controller;
 
 import de.tammon.dev.mdc.server.model.Customer;
 import de.tammon.dev.mdc.server.model.Order;
-import de.tammon.dev.mdc.server.model.PageSettings;
+import de.tammon.dev.mdc.server.model.PageModel;
 import de.tammon.dev.mdc.server.model.Product;
 import de.tammon.dev.mdc.server.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class ProductController {
     @Autowired
     DatabaseService databaseService;
     @Autowired
-    PageSettings pageSettings;
+    PageModel pageModel;
 
     @RequestMapping(value = {"/product","/fim"}, method = RequestMethod.GET)
     public String servePageProduct(Model model, String id) {
@@ -60,7 +60,7 @@ public class ProductController {
 
         model.addAttribute(product);
         model.addAttribute("title", "Ihre Produktdaten");
-        model.addAttribute(pageSettings);
+        model.addAttribute(pageModel);
 
         return "product";
     }
@@ -80,8 +80,8 @@ public class ProductController {
         }
     }
 
-    @ModelAttribute("pageSettings")
-    public PageSettings getPageSettings() {
-        return pageSettings;
+    @ModelAttribute("pageModel")
+    public PageModel getPageModel() {
+        return pageModel;
     }
 }

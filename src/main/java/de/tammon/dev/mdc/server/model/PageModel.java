@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  * Created by tammschw on 04/06/15.
  */
 @Component
-public class PageSettings {
+public class PageModel {
     private boolean orderSucceeded, orderFailed, doNotClear;
     private String title, pageName;
 

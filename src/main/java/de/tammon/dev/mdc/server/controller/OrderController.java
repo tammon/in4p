@@ -19,7 +19,7 @@ package de.tammon.dev.mdc.server.controller;
 
 import de.tammon.dev.mdc.server.model.Customer;
 import de.tammon.dev.mdc.server.model.Order;
-import de.tammon.dev.mdc.server.model.PageSettings;
+import de.tammon.dev.mdc.server.model.PageModel;
 import de.tammon.dev.mdc.server.model.Product;
 import de.tammon.dev.mdc.server.service.DatabaseService;
 import de.tammon.dev.mdc.server.service.SAPService;
@@ -40,7 +40,7 @@ public class OrderController {
     @Autowired
     SAPService sapService;
     @Autowired
-    PageSettings pageSettings;
+    PageModel pageModel;
 
     /**
      * processes the standard order view and the order success and fail page.
@@ -49,8 +49,8 @@ public class OrderController {
     @RequestMapping("/order")
     public String servePageOrder () {
         // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
-        pageSettings.clear();
-        pageSettings.setTitle("Bestellen Sie Ihre Taschenlampe");
+        pageModel.clear();
+        pageModel.setTitle("Bestellen Sie Ihre Taschenlampe");
         return "order";
     }
 
@@ -62,7 +62,7 @@ public class OrderController {
      */
     @RequestMapping(value = "/submitorder", method = RequestMethod.POST)
     public String submitOrder (Customer customer, Product product) {
-        pageSettings.clear();
+        pageModel.clear();
 
         if(!databaseService.doExist(product)) {
 
@@ -78,22 +78,22 @@ public class OrderController {
 
             System.out.println(customer);
 
-            pageSettings.orderSucceeded();
-            pageSettings.setPageName("index");
-            pageSettings.setTitle("Bestellung erfolgreich");
-            pageSettings.doNotClearOnNextUse();
+            pageModel.orderSucceeded();
+            pageModel.setPageName("index");
+            pageModel.setTitle("Bestellung erfolgreich");
+            pageModel.doNotClearOnNextUse();
 
             return "redirect:/";
         } else {
-            pageSettings.setTitle("Bestellung fehlgeschlagen!");
-            pageSettings.orderFailed();
-            pageSettings.doNotClearOnNextUse();
+            pageModel.setTitle("Bestellung fehlgeschlagen!");
+            pageModel.orderFailed();
+            pageModel.doNotClearOnNextUse();
             return "redirect:/order";
         }
     }
 
-    @ModelAttribute("pageSettings")
-    public PageSettings getPageSettings() {
-        return pageSettings;
+    @ModelAttribute("pageModel")
+    public PageModel getPageModel() {
+        return pageModel;
     }
 }
