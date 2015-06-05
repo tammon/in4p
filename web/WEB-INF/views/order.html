@@ -22,14 +22,14 @@
 
     <th:block th:replace="fragments/header :: header(${pageSettings.title})"/>
 
-    <script src="../resources/js/order/order-failed-alert.js" th:src="@{/static/js/order/order-failed-alert.js}" th:if="${pageSettings.orderFailed == true}"></script>
+    <script src="../resources/js/order/order-failed-alert.js" th:src="@{/static/js/order/order-failed-alert.js}" th:if="${pageSettings.orderFailed}"></script>
 </head>
 <body>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
-    <div class="alert alert-danger" id="orderFailedAlert" th:if="${pageSettings.orderFailed == true}">
+    <div class="alert alert-danger" id="orderFailedAlert" th:if="${pageSettings.orderFailed}">
     	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     	<strong>Bestellung fehlgeschlagen</strong> Da ist etwas bei der internen Verarbeitung schief gelaufen. Versuche es sp&auml;ter noch einmal oder kontaktiere den Administrator
     </div>
