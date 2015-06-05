@@ -20,6 +20,7 @@
  */
 
 $(function(){
+    $('#orderSucceededAlert').addClass('hidden');
     swal({
         title: "Vielen Dank f&uuml;r Ihre Bestellung!",
         text: "Ihre Bestellung wurde erfolgreich im System erfasst und wird in k&uuml;rze in die Produktion gehen",
