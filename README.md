@@ -7,9 +7,28 @@ This was initiated as a student research project of Tammo Schwindt at the [DHBW 
 
 ## Technologies
 The MDC-Server uses advanced cross-platform technologies to ensure a scalable architecture
-* Java Container: Apache Tomcat
-* Depedency Management: Maven
-* Framework: Spring.io (for specific projects see pom.xml)
-* Database: MongoDB
-* Loggin: log4j
-* Template Engine: thymeleaf
+
+* Architecture:
+  * Java Container: Apache Tomcat
+  * Database: MongoDB
+* Backend:
+  * Depedency Management: Maven
+  * Java Framework: Spring.io (for specific projects and versions see pom.xml)
+  * Loggin: logback (slf4j, log4j)
+  * Template Engine: Thymeleaf
+  * Testing: jUnit
+  * Aspects: AspectJ & Spring AOP
+  * Validation: Hibernate
+* Frontend:
+  * Markup & more: HTML5, CSS3, JavaScript
+  * CSS Framework: Bootstrap 3.3.4
+  * CSS Libraries: sweetAlert
+  * JavaScript Libraries: jQuery, sweetAlert
+  
+The frontend is build for both JavaScript enabled and disabled browsers. It can therefore be displayed on any device regardless of JavaScript support. It also doesn't depend on HTML 5 support although it is completely programmed in XHTML5 (HTML5 wich is also valid XML. Is a requirement of thymeleaf template engine).
+
+## Patterns
+* Object Orientated Programming: whole Project
+* Aspect Orientated Programming: Logging
+* Dependency Injection: whole Project (using Spring Framework)
+* Model View Controller: whole Project (using Spring Web MVC)

@@ -15,34 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
+package de.tammon.dev.mdc.server.service;
 
-import java.util.Map;
+import de.tammon.dev.mdc.server.model.Customer;
+import de.tammon.dev.mdc.server.model.Order;
+import org.springframework.stereotype.Service;
 
 /**
- * Created by tammschw on 13/04/15.
+ * Created by tammschw on 02/06/15.
  */
-public class ProductionParameter {
+@Service
+public class SAPService {
 
-    private String name;
-    private String unit;
-    private Map<String, Double> parameterSet;
-
-
-    /**
-     * creates a new {@link ProductionParameter} object with the given name.
-     * @param name Name of Parameter set must not be {@literal null}
-     */
-    public ProductionParameter(String name) {
-        this.name = name;
+    public String getCustomerId (Customer customer) {
+        return "1234";
     }
 
-    /**
-     * Adds a new key - value pair to the parameterSet
-     * @param key unique x-axis value (e.g. time)
-     * @param value y-axis value (e.g. pressure)
-     */
-    public void addParameter(String key, Double value) {
-        parameterSet.put(key, value);
+    public String getOrderId (Order order) {
+        return "5678";
     }
 }

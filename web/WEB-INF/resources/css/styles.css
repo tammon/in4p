@@ -1,0 +1,112 @@
+/*
+ * Copyright (c) 2015. Tammo Schwindt (Tammon) <dev@tammon.de>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#intro-container > img {
+    vertical-align: middle;
+    display: inline-block;
+    margin: auto;
+    animation: intro-img 2.5s linear;
+    animation-iteration-count: 1;
+    -webkit-animation: intro-img 2.5s linear;
+    -webkit-animation-iteration-count: 1;
+    opacity: 0;
+}
+
+#intro-container {
+    height: 100%;
+    width: 100%;
+    line-height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    opacity: 0;
+    z-index: -11111;
+    text-align: center;
+    animation: intro-bg 2.5s linear;
+    animation-iteration-count: 1;
+    -webkit-animation: intro-bg 2.5s linear;
+    -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes intro-img {
+    0% {-webkit-transform: scale(0.5, 0.5); opacity: 0.0;}
+    50% {-webkit-transform: scale(1.5, 1.5); opacity: 1.0;}
+    100% {-webkit-transform: scale(2.5, 2.5); opacity: 0;}
+}
+
+@keyframes intro-img {
+    0% {transform: scale(0.5, 0.5); opacity: 0.0;}
+    50% {transform: scale(1.5, 1.5); opacity: 1.0;}
+    100% {transform: scale(2.5, 2.5); opacity: 0;}
+}
+
+@keyframes intro-bg {
+    0% {opacity: 1; z-index: 11111;}
+    70% {opacity: 1;z-index: 11111;}
+    100% {opacity: 0;z-index: 11111;}
+}
+
+@-webkit-keyframes intro-bg {
+    0% {-webkit-opacity: 1;z-index: 11111;}
+    70% {-webkit-opacity: 1;z-index: 11111;}
+    100% {-webkit-opacity: 0;z-index: 11111;}
+}
+
+#intro-container:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.panel-default > .panel-heading h3 {
+    margin: 0;
+    color: #fff;
+}
+
+.panel-default > .panel-heading, .navbar {
+    background-color: #e21c2d !important;
+}
+
+.navbar * {
+    color: #fff !important;
+}
+
+.navbar-brand {
+    padding: 5px;
+}
+
+#icon-qr {
+    vertical-align: middle;
+    display: inline;
+    font-size: 2em;
+}
+
+#navbar-brand-name {
+    font-size: 1.5em;
+    display: inline;
+    vertical-align: middle;
+}
+
+body {
+    padding-top: 70px;
+}
+
+.dropdown li * {
+    color: black !important;
+}

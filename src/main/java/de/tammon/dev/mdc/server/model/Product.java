@@ -19,6 +19,7 @@ package de.tammon.dev.mdc.server.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -28,11 +29,31 @@ import java.util.List;
 public class Product extends AbstractDocument {
 
     private String productName;
+
+    /**
+     * Product ID that is referenced by the QR Code
+     * Does not have to be necessarily the same like the productionId although in most cases they will match
+     */
     private String externalProductId;
+
+    @NotNull
     private String productType;
+
+    /**
+     * ID and Position that is used during the production process
+     */
     private String productionId;
     private String productionIdPos;
-    private List<ProductionParameter> productionParameters;
+
+    /**
+     * A list of assigned simple production parameters
+     */
+    private List<SimpleProductionParameter> simpleProductionParameters;
+
+    /**
+     * A list of assigned X-Y production parameter sets
+     */
+    private List<XYProductionParameter> xyProductionParameters;
 
     public Product() {
     }
@@ -55,11 +76,10 @@ public class Product extends AbstractDocument {
     }
 
     /**
-     * Set the {@link Product} ID
-     * @param productId new {@link Product}
+     * Get the {@link Product} ID
      */
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public String getProductionId() {
+        return productionId;
     }
 
     /**
@@ -70,19 +90,96 @@ public class Product extends AbstractDocument {
         return productType;
     }
 
-    public String getProductId() {
-        return productId;
+    /**
+     * Get the external Product ID (reffered by QR Code)
+     * @return {@link String} externalProductId
+     */
+    public String getExternalProductId() {
+        return externalProductId;
+    }
+
+    /**
+     * Set the externalProductId that is reverenced by the QR Code
+     * @param externalProductId QR Code Id reference
+     */
+    public void setExternalProductId(String externalProductId) {
+        this.externalProductId = externalProductId;
+    }
+
+    /**
+     * Set the productionId of the product in the MES
+     * @param productionId MES productionId
+     */
+    public void setProductionId(String productionId) {
+        this.productionId = productionId;
+    }
+
+    /**
+     * Set the position number of the production identification number in the MES
+     * @param productionIdPos position number of production in MES
+     */
+    public void setProductionIdPos(String productionIdPos) {
+        this.productionIdPos = productionIdPos;
+    }
+
+    /**
+     * Adds a simple production parameter to the product
+     * @param simpleProductionParameter simple production parameter of the product
+     */
+    public void addSimpleProductionParameter(SimpleProductionParameter simpleProductionParameter) {
+        this.simpleProductionParameters.add(simpleProductionParameter);
+    }
+
+    /**
+     * Adds a list of simple production parameters to the product
+     * @param simpleProductionParameters List of simple production parameters of the product
+     */
+    public void addListOfSimpleProductionParameters(List<SimpleProductionParameter> simpleProductionParameters) {
+        this.simpleProductionParameters.addAll(simpleProductionParameters);
+    }
+
+    /**
+     * Adds a list of X-Y production parameters to the product
+     * @param xyProductionParameters List of X-Y production parameters of the product
+     */
+    public void addListOfXyProductionParameters(List<XYProductionParameter> xyProductionParameters) {
+        this.xyProductionParameters.addAll(xyProductionParameters);
+    }
+
+    /**
+     * Adds a single X-Y production parameters to the product
+     * @param xyProductionParameter X-Y production parameter of the product
+     */
+    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
+        this.xyProductionParameters.add(xyProductionParameter);
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductionIdPos() {
+        return productionIdPos;
+    }
+
+    public List<SimpleProductionParameter> getSimpleProductionParameters() {
+        return simpleProductionParameters;
+    }
+
+    public List<XYProductionParameter> getXyProductionParameters() {
+        return xyProductionParameters;
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "productName='" + productName + '\'' +
-                ", productId='" + productId + '\'' +
+                ", externalProductId='" + externalProductId + '\'' +
                 ", productType='" + productType + '\'' +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
-                ", productionParameters=" + productionParameters +
+                ", simpleProductionParameters=" + simpleProductionParameters +
+                ", xyProductionParameters=" + xyProductionParameters +
                 '}';
     }
 }

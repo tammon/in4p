@@ -15,22 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
+package de.tammon.dev.mdc.server.controller;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
+import de.tammon.dev.mdc.server.model.PageModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 07/06/15.
  */
+public abstract class AbstractMdcController {
 
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    Product getByProductName(String productName);
+    @Autowired
+    protected ResourceBundleMessageSource messageSource;
 
-    Product getByExternalProductId(String externalProductId);
+    @Autowired
+    protected PageModel pageModel;
 
-    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
-    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
 }

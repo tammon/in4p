@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2015. Tammo Schwindt (Tammon) <dev@tammon.de>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="de">
+    <meta charset="UTF-8"/>
+    <title>Wrapper Fragment</title>
+</head>
+<body>
+
+<nav class="navbar navbar-fixed-top navbar-default" th:fragment="navbar">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/" th:href="@{/}">
+                <span id="icon-qr" class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+                <span id="navbar-brand-name"> DHBW Mosbach</span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" th:text="#{navbar.goto}">Go To<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/fim" th:href="@{/fim}"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span><span th:text="#{navbar.productTracking}">Product Tracking</span></a></li>
+                        <li class="divider"></li>
+                        <li><a href="/order" th:href="@{/order}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span th:text="#{navbar.productOrder}">Product Order</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+</body>
+</html>

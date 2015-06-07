@@ -17,9 +17,11 @@
 
 package de.tammon.dev.mdc.server.model;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +31,13 @@ import java.util.List;
 @Component
 public class Order extends AbstractDocument {
 
+    @NotNull
     private String orderId;
 
-    @DBRef
+    @DBRef (lazy = true)
     private Customer customer;
 
-    @DBRef
+    @DBRef (lazy = true)
     private List<Product> products = new ArrayList<>();
 
 
@@ -73,8 +76,14 @@ public class Order extends AbstractDocument {
      * Adds a List of {@link Product}s to the {@link Order}
      * @param products {@link List} of {@link Product}s to be added
      */
-    public void addProducts(List<Product> products) {
+    public void addListOfProducts(List<Product> products) {
         this.products.addAll(products);
+    }
+
+    public void addProducts(Product... products) {
+        for (Product product : products) {
+            this.products.add(product);
+        }
     }
 
     public void addProduct (Product product){
@@ -83,5 +92,22 @@ public class Order extends AbstractDocument {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +
+                ", customer=" + customer +
+                ", products=" + products +
+                '}';
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public String getOrderId() {
+        return orderId;
     }
 }

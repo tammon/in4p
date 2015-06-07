@@ -1,10 +1,76 @@
 <!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2015. Tammo Schwindt (Tammon) <dev@tammon.de>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8"/>
-    <title>Hello World</title>
+
+    <th:block th:replace="fragments/header :: header(${pageModel.title})"/>
+
+    <link href="../resources/css/index/index-style.css" th:href="@{/static/css/index/index-style.css}" type="text/css"
+          rel="stylesheet"/>
+
+    <script src="../resources/js/index/order-successful-alert.js" type="text/javascript"
+            th:src="@{/static/js/index/order-successful-alert.js}"
+            th:if="${pageModel.orderSucceeded}"></script>
 </head>
 <body>
-    <p th:text="${message}">test</p>
+
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container">
+    <div class="alert alert-success" th:if="${pageModel.orderSucceeded}" id="orderSucceededAlert">
+        <button type="button" class="close" data-dismiss="alertSucceededAlert" aria-hidden="true">&times;</button>
+        <strong th:text="#{order.orderSuccess.thanks}"></strong><span th:text="#{order.orderSuccess.message}">Your order has been successfully submitted to the system. The production will start soon</span>
+    </div>
+
+    <h1 th:text="#{index.heading}">Welcome to the DHBW-Mosbach E-FIT Laboratory</h1>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" th:text="#{index.product.heading}">Track your DHBW product</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="../resources/images/magnifying-glass.png" class="img-responsive center-block limit-height"
+                         th:src="@{/static/images/magnifying-glass.png}" alt="track product"/>
+                    <a class="btn btn-danger center-block" type="button" href="/fim" th:href="@{/fim}"
+                       th:text="#{index.product.button}">Find your product!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" th:text="#{index.order.heading}">Order your DHBW product</h3>
+                </div>
+                <div class="panel-body ">
+                    <img class="img-responsive center-block limit-height" src="../resources/images/order-basket.png"
+                         th:src="@{/static/images/order-basket.png}" alt="order"/>
+                    <a class="btn btn-danger center-block" type="button" href="/order" th:href="@{/order}"
+                       th:text="#{index.order.button}">Order Form!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>

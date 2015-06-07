@@ -24,16 +24,16 @@ import java.math.BigInteger;
 /**
  * Created by tammschw on 13/04/15.
  */
-public class AbstractDocument {
+public abstract class AbstractDocument {
     @Id
-    private BigInteger id;
+    private String id;
 
     /**
      * Returns the identifier of the document.
      *
      * @return the id
      */
-    public BigInteger getId() {
+    public String getId() {
         return id;
     }
 

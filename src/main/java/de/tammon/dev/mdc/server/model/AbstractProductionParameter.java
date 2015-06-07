@@ -17,20 +17,27 @@
 
 package de.tammon.dev.mdc.server.model;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
-
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 13/04/15.
  */
+public abstract class AbstractProductionParameter {
 
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    Product getByProductName(String productName);
+    private String name;
+    private String unit;
 
-    Product getByExternalProductId(String externalProductId);
+    public String getName() {
+        return name;
+    }
 
-    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
-    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }

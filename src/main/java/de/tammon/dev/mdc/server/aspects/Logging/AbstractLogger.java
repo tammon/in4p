@@ -15,22 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
+package de.tammon.dev.mdc.server.aspects.Logging;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 01/06/15.
  */
+public abstract class AbstractLogger {
+    protected Logger logger;
 
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    Product getByProductName(String productName);
-
-    Product getByExternalProductId(String externalProductId);
-
-    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
-    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
+    protected Logger getLogger (Class c) {
+        return LoggerFactory.getLogger(c);
+    }
 }

@@ -17,15 +17,31 @@
 
 package de.tammon.dev.mdc.server.controller;
 
-import org.springframework.ui.Model;
+import de.tammon.dev.mdc.server.model.PageModel;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Locale;
 
 /**
  * Created by tammschw on 12/04/15.
  */
-public class IndexController {
+@Controller
+public class IndexController extends AbstractMdcController {
 
-    public String welcome(Model model) {
-        model.addAttribute("message", "hello World!");
-        return "index";
+    private static final String INDEX_PAGE = "index";
+
+    @RequestMapping(value = {"/", "/successfulOrder"})
+    public String servePageIndex(Locale locale) {
+        pageModel.clear();
+        pageModel.setPageName(INDEX_PAGE);
+        pageModel.setTitle(messageSource.getMessage("index.page.title", null, locale));
+        return INDEX_PAGE;
+    }
+
+    @ModelAttribute("pageModel")
+    public PageModel getPageModel() {
+        return this.pageModel;
     }
 }

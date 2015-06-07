@@ -17,20 +17,25 @@
 
 package de.tammon.dev.mdc.server.model;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
+import java.util.Map;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 01/06/15.
  */
+public class XYProductionParameter extends AbstractProductionParameter {
 
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    Product getByProductName(String productName);
+    private Map<String, Double> xyParameterSet;
 
-    Product getByExternalProductId(String externalProductId);
+    /**
+     * Adds a new key - value pair to the parameterSet
+     * @param key unique x-axis value (e.g. time)
+     * @param value y-axis value (e.g. pressure)
+     */
+    public void addParameter(String key, Double value) {
+        xyParameterSet.put(key, value);
+    }
 
-    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
-    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
+    public Map<String, Double> getXyParameterSet() {
+        return xyParameterSet;
+    }
 }
