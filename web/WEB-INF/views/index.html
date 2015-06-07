@@ -17,22 +17,28 @@
   -->
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en" th:replace="fragments/header :: header (${title})">
+<head lang="en">
     <meta charset="UTF-8"/>
-    <title></title>
+
+    <th:block th:replace="fragments/header :: header(${pageModel.title})"/>
+
+    <script src="../resources/js/index/order-successful-alert.js" type="text/javascript" th:src="@{/static/js/index/order-successful-alert.js}"
+            th:if="${pageModel.orderSucceeded}"></script>
 </head>
 <body>
 
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
+    <div class="alert alert-success" th:if="${pageModel.orderSucceeded}" id="orderSucceededAlert">
+    	<button type="button" class="close" data-dismiss="alertSucceededAlert" aria-hidden="true">&times;</button>
+    	<strong>Vielen Dank f&uuml;r Ihre Bestellung!</strong> Ihre Bestellung wurde erfolgreich im System erfasst und wird in k&uuml;rze in die Produktion gehen
+    </div>
     <section>
         <h1>Das ist der Indexcontainer</h1>
         Dieser dient vorerst nur zur Verdeutlichung der Thymeleaf Parameter Funktion!
     </section>
 </div>
-
-<div th:replace="fragments/intro :: intro"></div>
 
 </body>
 </html>

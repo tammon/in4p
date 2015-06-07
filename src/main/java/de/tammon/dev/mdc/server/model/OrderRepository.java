@@ -26,5 +26,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends MongoRepository<Order, String> {
 
-    public Order findByProductsContaining(Product product);
+    Order findByProductsContaining(Product product);
+
+    Order getByOrderId (String OrderId);
 }

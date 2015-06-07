@@ -18,6 +18,7 @@
 package de.tammon.dev.mdc.server.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
@@ -35,15 +36,21 @@ public class Customer extends AbstractDocument {
 
     @NotNull
     private Gender gender;
+
     @NotNull
+    @Length(min = 2)
     private String firstName;
+
     @NotNull
+    @Length(min = 2)
     private String lastName;
 
-    private Address address;
-
     @Email
+    @NotNull
+    @Length(min = 6)
     private String email;
+
+    private Address address;
 
     public String getFirstName() {
         return firstName;
@@ -83,6 +90,14 @@ public class Customer extends AbstractDocument {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     @Override

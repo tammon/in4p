@@ -15,22 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
+package de.tammon.dev.mdc.server.service;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
+import de.tammon.dev.mdc.server.model.Customer;
+import de.tammon.dev.mdc.server.model.Order;
+import org.springframework.stereotype.Service;
 
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 02/06/15.
  */
+@Service
+public class SAPService {
 
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    Product getByProductName(String productName);
+    public String getCustomerId (Customer customer) {
+        return "1234";
+    }
 
-    Product getByExternalProductId(String externalProductId);
-
-    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
-    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
+    public String getOrderId (Order order) {
+        return "5678";
+    }
 }

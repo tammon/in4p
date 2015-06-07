@@ -18,10 +18,7 @@
 package de.tammon.dev.mdc.server.aspects.Logging;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
@@ -36,29 +33,22 @@ import java.util.stream.Collectors;
 @Component
 public class DatabaseLoggingAspect extends AbstractLogger{
 
-    @Pointcut("execution(* de.tammon.dev.mdc.server.service.*.save(..))")
-    public void saveToDatabase() {}
-
-    @Pointcut("execution(* de.tammon.dev.mdc.server.service.DatabaseService.get*(..))")
-    public void allGetMethods() {}
-
-    @Before("saveToDatabase()")
+    @Before("de.tammon.dev.mdc.server.aspects.Pointcuts.saveToDatabase()")
     public void beforeSaveToDatabase(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         logger = getLogger(joinPoint.getTarget().getClass());
         for (Object arg : args) logger.debug("Parse object to database repository for saving: " + arg);
     }
 
-    @AfterReturning(value = "allGetMethods()", returning = "result")
+    @AfterReturning(value = "de.tammon.dev.mdc.server.aspects.Pointcuts.allDatabaseGetMethods()", returning = "result")
     public void aroundDatabaseGetMethods(JoinPoint joinPoint, Object result) {
         logger = getLogger(joinPoint.getTarget().getClass());
         logger.debug(joinPoint.getSignature().toShortString()
                 + ": Tried to get object of "
                 + ((MethodSignature)joinPoint.getSignature()).getReturnType().toString()
                 + " from database by the provided Parameters "
-                + (new String(Arrays
-                    .stream(Arrays.copyOf(joinPoint.getArgs(), joinPoint.getArgs().length, String[].class))
-                    .collect(Collectors.joining(" ")))));
+                + (Arrays.stream(Arrays.copyOf(joinPoint.getArgs(), joinPoint.getArgs().length, String[].class))
+                    .collect(Collectors.joining(" "))));
         if (result == null) logger.error(joinPoint.getSignature().toShortString() + ": Didn't find requested object! Sorry...");
         else logger.debug(joinPoint.getSignature().toShortString() + ": Found the requested object " + result.toString());
     }

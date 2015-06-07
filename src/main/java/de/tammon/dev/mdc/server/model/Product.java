@@ -28,7 +28,6 @@ import java.util.List;
 @Component
 public class Product extends AbstractDocument {
 
-    @NotNull
     private String productName;
 
     /**

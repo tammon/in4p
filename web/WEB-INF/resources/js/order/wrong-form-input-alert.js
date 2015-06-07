@@ -15,22 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
-
 /**
- * Created by tammschw on 12/04/15.
+ * Created by tammschw on 07/06/15.
  */
 
-@Repository
-public interface ProductRepository extends MongoRepository<Product, String> {
-    Product getByProductName(String productName);
-
-    Product getByExternalProductId(String externalProductId);
-
-    @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
-    Product getByProductionIdAndPosition(String productionId, String productionIdPos);
-}
+$(function () {
+    $('#wrong-form-input-alert').addClass('hidden');
+    sweetAlert({
+        title: "Uuups...",
+        text: "<strong>Bitte f&uuml;lle das Formular vollst&auml;ndig und korrekt aus:</strong>" + $('#wrong-form-input-errors').html(),
+        html: true,
+        type: 'warning'
+    });
+});

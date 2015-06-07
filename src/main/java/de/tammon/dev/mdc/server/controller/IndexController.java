@@ -17,8 +17,10 @@
 
 package de.tammon.dev.mdc.server.controller;
 
+import de.tammon.dev.mdc.server.model.PageModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -27,9 +29,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/")
-    public String servePageIndex(Model model) {
-        model.addAttribute("title", "Startseite");
+    @Autowired
+    PageModel pageModel;
+
+    @RequestMapping(value = {"/", "/successfulOrder"})
+    public String servePageIndex() {
+        pageModel.clear();
+        pageModel.setPageName("index");
+        pageModel.setTitle("Startseite");
         return "index";
+    }
+
+    @ModelAttribute("pageModel")
+    public PageModel getPageModel() {
+        return this.pageModel;
     }
 }
