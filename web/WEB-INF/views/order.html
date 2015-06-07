@@ -22,7 +22,10 @@
 
     <th:block th:replace="fragments/header :: header(${pageModel.title})"/>
 
-    <script src="../resources/js/order/order-failed-alert.js" th:src="@{/static/js/order/order-failed-alert.js}" th:if="${pageModel.orderFailed}"></script>
+    <script src="../resources/js/order/order-failed-alert.js" th:src="@{/static/js/order/order-failed-alert.js}"
+            th:if="${pageModel.orderFailed}"></script>
+    <script src="../resources/js/order/wrong-form-input-alert.js" th:src="@{/static/js/order/wrong-form-input-alert.js}"
+            th:if="${#fields.hasErrors('${customer.*}')}"></script>
 </head>
 <body>
 
