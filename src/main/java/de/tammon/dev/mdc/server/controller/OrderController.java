@@ -25,9 +25,12 @@ import de.tammon.dev.mdc.server.service.DatabaseService;
 import de.tammon.dev.mdc.server.service.SAPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 /**
  * Created by tammschw on 12/05/15.
@@ -61,7 +64,12 @@ public class OrderController {
      * @return a redirection to order with set parameters according to the success of the submit
      */
     @RequestMapping(value = "/submitorder", method = RequestMethod.POST)
-    public String submitOrder (Customer customer, Product product) {
+    public String submitOrder (@ModelAttribute @Valid Customer customer,
+                               BindingResult bindingResult,
+                               Product product) {
+
+        if (bindingResult.hasErrors()) return "order";
+
         pageModel.clear();
 
         if(!databaseService.doExist(product)) {
