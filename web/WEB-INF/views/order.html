@@ -30,17 +30,21 @@
 
 <div class="container">
     <div class="alert alert-danger" id="orderFailedAlert" th:if="${pageModel.orderFailed}">
-    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    	<strong>Bestellung fehlgeschlagen</strong> Da ist etwas bei der internen Verarbeitung schief gelaufen. Versuche es sp&auml;ter noch einmal oder kontaktiere den Administrator
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Bestellung fehlgeschlagen</strong> Da ist etwas bei der internen Verarbeitung schief gelaufen. Versuche
+        es sp&auml;ter noch einmal oder kontaktiere den Administrator
     </div>
     <section>
-        <h1>Bestellen Sie Ihre DHBW-Taschenlampe <small>DHBW-Mosbach E-FIT Labor</small></h1>
+        <h1>Bestellen Sie Ihre DHBW-Taschenlampe
+            <small>DHBW-Mosbach E-FIT Labor</small>
+        </h1>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         Willkommen auf der Bestellseite für eine Taschenlampe des Labors für Evolutionäre-Fertigungs IT
-                        (E-FIT) der Dualen Hochschule Baden-Württemberg Mosbach. Ihre Taschenlampe wird individuell für Sie gefertigt!
+                        (E-FIT) der Dualen Hochschule Baden-Württemberg Mosbach. Ihre Taschenlampe wird individuell für
+                        Sie gefertigt!
                     </div>
                 </div>
             </div>
@@ -50,14 +54,26 @@
                         <h3>Bestellung</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="submitorder" method="post" class="form-horizontal" role="form">
+                        <form action="submitorder" method="POST" class="form-horizontal" role="form" id="orderForm" th:object="${customer}">
+
+                            <div class="alert alert-danger" id="wrong-form-input-alert" th:if="${#fields.hasErrors()}">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Uuups...</strong> Bitte fülle das Formular korrekt aus!
+                                <div id="wrong-form-input-errors">
+                                    Folgende Felder sind ungültig:
+                                    <span th:if="${#fields.hasErrors('${customer.gender}')}">Anrede</span>
+                                    <span th:if="${#fields.hasErrors('${customer.firstName}')}">Vorname</span>
+                                    <span th:if="${#fields.hasErrors('${customer.lastName}')}">Nachname</span>
+                                    <span th:if="${#fields.hasErrors('${customer.email}')}">E-Mail</span>
+                                </div>
+                            </div>
 
                             <!-- Enter Gender -->
                             <div class="form-group">
                                 <label for="gender" class="col-sm-2 control-label">Anrede</label>
 
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="gender" name="gender">
+                                    <select class="form-control" id="gender" name="gender" th:field="*{gender}">
                                         <option value="MALE">Herr</option>
                                         <option value="FEMALE">Frau</option>
                                     </select>
@@ -65,29 +81,38 @@
                             </div>
 
                             <!-- Enter first Name -->
-                            <div class="form-group">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error has-feedback' : ''">
                                 <label for="firstName" class="col-sm-2 control-label">Vorname</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Max" required="true"/>
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                           placeholder="Max" required="true" th:field="*{firstName}"/>
+                                    <span th:if="${#fields.hasErrors('firstName')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
 
                             <!-- Enter last Name -->
-                            <div class="form-group">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback' : ''">
                                 <label for="lastName" class="col-sm-2 control-label">Nachname</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Mustermann" required="true"/>
+                                    <input type="text" class="form-control" id="lastName" name="lastName"
+                                           placeholder="Mustermann" required="true" th:field="*{lastName}"/>
+                                    <span th:if="${#fields.hasErrors('lastName')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
 
                             <!-- Enter E-Mail Address-->
-                            <div class="form-group">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error has-feedback' : ''">
                                 <label for="email" class="col-sm-2 control-label">E-Mail</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control has-feedback" id="email" name="email" placeholder="max.mustermann@m-online.de" required="true"/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@</span>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                               placeholder="max.mustermann@m-online.de" required="true" th:field="*{email}"/>
+                                    </div>
+                                    <span th:if="${#fields.hasErrors('email')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
 
@@ -96,7 +121,7 @@
                                 <label for="Product" class="col-sm-2 control-label">Produkt</label>
 
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="Product" name="productType" >
+                                    <select class="form-control" id="Product" name="productType">
                                         <option value="1">Taschenlampe</option>
                                     </select>
                                 </div>
