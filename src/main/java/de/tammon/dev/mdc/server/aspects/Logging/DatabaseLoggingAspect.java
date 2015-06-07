@@ -41,7 +41,7 @@ public class DatabaseLoggingAspect extends AbstractLogger{
     }
 
     @AfterReturning(value = "de.tammon.dev.mdc.server.aspects.Pointcuts.allDatabaseGetMethods()", returning = "result")
-    public void aroundDatabaseGetMethods(JoinPoint joinPoint, Object result) {
+    public void afterReturningDatabaseGetMethods(JoinPoint joinPoint, Object result) {
         logger = getLogger(joinPoint.getTarget().getClass());
         logger.debug(joinPoint.getSignature().toShortString()
                 + ": Tried to get object of "
