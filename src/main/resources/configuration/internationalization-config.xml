@@ -23,6 +23,7 @@
     <!-- set the baseName and bean for the internationalization -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="internationalization.messages"/>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
 </beans>
