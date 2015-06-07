@@ -30,4 +30,7 @@
        <!-- Import Internationalization config -->
        <import resource="classpath:configuration/internationalization-config.xml"/>
 
+       <!-- Import Content Negotiation -->
+       <import resource="classpath:configuration/content-negotiation-config.xml"/>
+
 </beans>
