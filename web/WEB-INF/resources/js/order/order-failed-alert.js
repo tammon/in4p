@@ -21,8 +21,9 @@
 
 $(function () {
     $('#orderFailedAlert').addClass('hidden');
-    sweetAlert({title: "Uups...",
-        text: "Da ist etwas bei der internen Verarbeitung schief gelaufen. Versuche es sp&auml;ter noch einmal oder kontaktiere den Administrator",
+    sweetAlert({
+        title: "Uups...",
+        text: $('#order-orderFailed-attributeName')[0].outerHTML + $('#order-orderFailed-message').html(),
         html: true,
         type: "error"});
 });

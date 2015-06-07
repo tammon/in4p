@@ -15,16 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package de.tammon.dev.mdc.server.controller;
+
+import de.tammon.dev.mdc.server.model.PageModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
+
 /**
  * Created by tammschw on 07/06/15.
  */
+public abstract class AbstractMdcController {
 
-$(function () {
-    $('#wrong-form-input-alert').addClass('hidden');
-    sweetAlert({
-        title: $('#order-formInputError-heading')[0].outerHTML,
-        text: $('#order-formInputError-message')[0].outerHTML + $('#wrong-form-input-errors')[0].outerHTML,
-        html: true,
-        type: 'warning'
-    });
-});
+    @Autowired
+    protected ResourceBundleMessageSource messageSource;
+
+    @Autowired
+    protected PageModel pageModel;
+
+}

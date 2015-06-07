@@ -27,4 +27,7 @@
        <!-- Import AOP configuration -->
        <import resource="classpath:configuration/aop-config.xml"/>
 
+       <!-- Import Internationalization config -->
+       <import resource="classpath:configuration/internationalization-config.xml"/>
+
 </beans>
