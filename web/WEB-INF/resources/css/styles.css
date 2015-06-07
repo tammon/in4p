@@ -106,3 +106,7 @@
 body {
     padding-top: 70px;
 }
+
+.dropdown li * {
+    color: black !important;
+}
