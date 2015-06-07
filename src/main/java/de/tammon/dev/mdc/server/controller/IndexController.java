@@ -35,7 +35,6 @@ public class IndexController {
     @RequestMapping(value = {"/", "/successfulOrder"})
     public String servePageIndex() {
         pageModel.clear();
-        System.out.println(pageModel);
         pageModel.setPageName("index");
         pageModel.setTitle("Startseite");
         return "index";

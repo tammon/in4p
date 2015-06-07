@@ -80,11 +80,7 @@ public class OrderController {
             Order order = new Order(customer,product);
             order.setOrderId(sapService.getOrderId(order));
 
-            System.out.println(customer);
-
             databaseService.save(customer, product, order);
-
-            System.out.println(customer);
 
             pageModel.orderSucceeded();
             pageModel.setPageName("index");

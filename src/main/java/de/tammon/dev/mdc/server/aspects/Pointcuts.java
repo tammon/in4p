@@ -17,10 +17,13 @@
 
 package de.tammon.dev.mdc.server.aspects;
 
+import de.tammon.dev.mdc.server.model.Customer;
+import de.tammon.dev.mdc.server.model.Product;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 /**
  * Created by tammschw on 02/06/15.
@@ -30,7 +33,8 @@ import org.springframework.ui.Model;
 public class Pointcuts {
 
     @Pointcut("execution(* de.tammon.dev.mdc.server.service.DatabaseService.*(Object))")
-    public void allObjectAcceptingDatabaseMethods () {}
+    public void allObjectAcceptingDatabaseMethods() {
+    }
 
     /**
      * Pointcut
@@ -49,11 +53,18 @@ public class Pointcuts {
      * @param id external production ID referred by QR-Code
      */
     @Pointcut("execution(String de.tammon.dev.mdc.server.controller..*.servePageProduct(..)) && args(id)")
-    public void serveProductPage(String id) {}
+    public void serveProductPage(String id) {
+    }
 
     @Pointcut("execution(* de.tammon.dev.mdc.server.service.*.save(..))")
-    public void saveToDatabase() {}
+    public void saveToDatabase() {
+    }
 
     @Pointcut("execution(* de.tammon.dev.mdc.server.service.DatabaseService.get*(..))")
-    public void allDatabaseGetMethods() {}
+    public void allDatabaseGetMethods() {
+    }
+
+    @Pointcut("execution(String de.tammon.dev.mdc.server.controller.OrderController.submitOrder(..)) && args(customer, bindingResult, product)")
+    public void submitOrderHandler(Customer customer, BindingResult bindingResult, Product product) {
+    }
 }
