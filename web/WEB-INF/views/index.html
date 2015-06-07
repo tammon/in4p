@@ -22,7 +22,11 @@
 
     <th:block th:replace="fragments/header :: header(${pageModel.title})"/>
 
-    <script src="../resources/js/index/order-successful-alert.js" type="text/javascript" th:src="@{/static/js/index/order-successful-alert.js}"
+    <link href="../resources/css/index/index-style.css" th:href="@{/static/css/index/index-style.css}" type="text/css"
+          rel="stylesheet"/>
+
+    <script src="../resources/js/index/order-successful-alert.js" type="text/javascript"
+            th:src="@{/static/js/index/order-successful-alert.js}"
             th:if="${pageModel.orderSucceeded}"></script>
 </head>
 <body>
