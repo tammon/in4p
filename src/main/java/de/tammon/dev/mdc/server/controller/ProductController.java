@@ -29,19 +29,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Locale;
+
 /**
  * Created by tammschw on 10/05/15.
  */
 @Controller
-public class ProductController {
+public class ProductController extends AbstractMdcController {
 
+    private static final String PRODUCT_PAGE = "product";
     @Autowired
     DatabaseService databaseService;
-    @Autowired
-    PageModel pageModel;
 
-    @RequestMapping(value = {"/product","/fim"}, method = RequestMethod.GET)
-    public String servePageProduct(Model model, String id) {
+    @RequestMapping(value = {"/product", "/fim"}, method = RequestMethod.GET)
+    public String servePageProduct(Model model,
+                                   String id,
+                                   Locale locale) {
         Product product;
 
         if (id != null && (product = databaseService.getProductByExternalProductId(id)) != null) {
@@ -53,16 +56,15 @@ public class ProductController {
             if ((order = databaseService.getOrderByContainingProduct(product)) != null) model.addAttribute(order);
             if ((customer = order.getCustomer()) != null) {
                 model.addAttribute(customer);
-                model.addAttribute("customerTitle", getCustomerTitle(customer));
+                model.addAttribute("customerTitle", getCustomerTitle(customer, locale));
             }
         } else product = getExampleProduct();
 
 
         model.addAttribute(product);
-        model.addAttribute("title", "Ihre Produktdaten");
-        model.addAttribute(pageModel);
+        pageModel.setTitle(messageSource.getMessage("product.pageTitle", null, locale));
 
-        return "product";
+        return PRODUCT_PAGE;
     }
 
     private Product getExampleProduct() {
@@ -72,11 +74,15 @@ public class ProductController {
         return product;
     }
 
-    private String getCustomerTitle(Customer customer) {
+    private String getCustomerTitle(Customer customer,
+                                    Locale locale) {
         switch (customer.getGender()) {
-            case MALE: return "Herr";
-            case FEMALE: return "Frau";
-            default: return null;
+            case MALE:
+                return messageSource.getMessage("customer.title.male", null, locale);
+            case FEMALE:
+                return messageSource.getMessage("customer.title.female", null, locale);
+            default:
+                return null;
         }
     }
 
