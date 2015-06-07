@@ -27,120 +27,134 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
-  <section>
-    <h1>
-        <span th:if="${customer != null}">Hallo
+    <section>
+        <h1>
+        <span th:if="${customer != null}">
+          <span th:text="">Hallo</span>
           <span th:if="${customerTitle}"></span>
         <span th:text="${customer.lastName}"></span>!
       </span>
-      <span th:if="${customer == null}">Herzlich Willkommen!</span>
-      <small>Produktionsdatenübersicht</small>
-    </h1>
-    <div class="row">
-      <div class="col-md-8">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <p>Vielen Dank, dass Sie unsere Industrie 4.0 Anlage besucht haben. Wir haben für Sie im folgenden alle Daten bereitgestellt,
-              die im Zuge der Ferigung Ihrer persönlichen Taschenlampe erfasst wurden. Des Weiteren finden Sie auch die Kundendaten, die uns zum Zeitpunkt
-              der Produktion bekannt waren und in unserem System hinterlegt sind. Die hier angezeigten Produktionsdaten beziehen sich exakt auf die Taschenlampe,
-              die sie gerade in Ihrer Hand halten.
-            </p>
-            <p>
-              Dies ist ein Industrie 4.0 Projekt der DHBW Mosbach. Es soll Wege darlegen, Produktspezifische Daten während des Produktionsprozesses zu erfassen, zu speichern und
-              anschließend innerhalb des Wertschöpfungsprozesses wie aber auch vom Endkunden abrufen zu lassen. Diese Technologie ermöglicht es dem Kunden während und nach der Produktion
-              Daten über sein gekauftes Produkt abzurufen. Dies kann sowohl im Nachverfolgungsprozess als auch in Haftungsfragen sinnvoll sein. Der Hersteller kann aus der Masse der
-              produktspezifischen Daten mit Big Data Technologien Rückschlüsse auf Qualitäts- und Ausfallgrößen ziehen, um seine Prozesse zu optimieren und somit Ausfälle des Produktes
-              oder der Produktionsanlage zu vermeiden.
-            </p>
-          </div>
+            <span th:if="${customer == null}" th:text="#{product.heading.welcome}">Welcome!</span>
+            <small th:text="#{product.heading.subheading}">production data overview</small>
+        </h1>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p th:text="#{product.welcomeText.partOne}">Vielen Dank, dass Sie unsere Industrie 4.0 Anlage
+                            besucht haben. Wir haben für Sie im folgenden alle Daten bereitgestellt,
+                            die im Zuge der Ferigung Ihrer persönlichen Taschenlampe erfasst wurden. Des Weiteren finden
+                            Sie auch die Kundendaten, die uns zum Zeitpunkt
+                            der Produktion bekannt waren und in unserem System hinterlegt sind. Die hier angezeigten
+                            Produktionsdaten beziehen sich exakt auf die Taschenlampe,
+                            die sie gerade in Ihrer Hand halten.
+                        </p>
+
+                        <p th:text="#{product.welcomeText.partTwo}">
+                            Dies ist ein Industrie 4.0 Projekt der DHBW Mosbach. Es soll Wege darlegen,
+                            Produktspezifische Daten während des Produktionsprozesses zu erfassen, zu speichern und
+                            anschließend innerhalb des Wertschöpfungsprozesses wie aber auch vom Endkunden abrufen zu
+                            lassen. Diese Technologie ermöglicht es dem Kunden während und nach der Produktion
+                            Daten über sein gekauftes Produkt abzurufen. Dies kann sowohl im Nachverfolgungsprozess als
+                            auch in Haftungsfragen sinnvoll sein. Der Hersteller kann aus der Masse der
+                            produktspezifischen Daten mit Big Data Technologien Rückschlüsse auf Qualitäts- und
+                            Ausfallgrößen ziehen, um seine Prozesse zu optimieren und somit Ausfälle des Produktes
+                            oder der Produktionsanlage zu vermeiden.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- general product information-->
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 th:text="#{product.generalinfo.heading}">Ihr DHBW-Mosbach Produkt</h3>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th th:text="#{product.productName.attributeName}">Produktname</th>
+                            <td th:text="${product.productName}">Wert 1</td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{product.productionId.attributeName}">Production ID</th>
+                            <td th:text="${product.productionId}" th:if="${product.productionId != null}">Wert 2</td>
+                            <td th:if="${product.productionId == null}" th:text="#{product.generalinfo.notYetAssigned}">
+                                [Not yet assigned]
+                            </td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{product.productionIdPos.attributeName}">Position</th>
+                            <td th:text="${product.productionIdPos}" th:if="${product.productionId != null}">Wert 3</td>
+                            <td th:if="${product.productionId == null}" th:text="#{product.generalinfo.notYetAssigned}">
+                                [Not yet assigned]
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- general product information-->
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3>Ihr DHBW-Mosbach Produkt</h3>
-          </div>
-          <table class="table table-striped">
-            <tr>
-              <th>Produktname</th>
-              <td th:text="${product.productName}">Wert 1</td>
-            </tr>
-            <tr>
-              <th>Produktionsnummer</th>
-              <td th:text="${product.productionId}" th:if="${product.productionId != null}">Wert 2</td>
-              <td th:if="${product.productionId == null}">[Noch nicht zugwiesen]</td>
-            </tr>
-            <tr>
-              <th>Position</th>
-              <td th:text="${product.productionIdPos}" th:if="${product.productionId != null}">Wert 3</td>
-              <td th:if="${product.productionId == null}">[Noch nicht zugwiesen]</td>
-            </tr>
-          </table>
+
+        <!-- product data-->
+        <div class="row">
+
+            <div class="col-md-6">
+                <!-- production information panel-->
+                <div id="product-information" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 th:text="#{product.productionData.heading}">Produktionsdaten</h3>
+                    </div>
+                    <div class="panel-body" th:if="${product.simpleProductionParameters == null}">
+                        <span th:if="${product.productionId == null}" th:text="#{product.productionData.notYetAvailable.noProductionIdGiven}">No production data and production id is not given message</span>
+                        <span th:if="${product.productionId != null}" th:text="#{product.productionData.notYetAvailable.productionIdGiven}">No production data although production id is given message</span>
+                    </div>
+                    <table class="table table-striped" th:if="${product.simpleProductionParameters != null}">
+                        <tr>
+                            <th th:text="#{product.productionData.dataName}">Data name</th>
+                            <th th:text="#{product.productionData.value}">Value</th>
+                            <th th:text="#{product.productionData.unit}">Unit</th>
+                        </tr>
+                        <tr th:each="prodParam : ${product.simpleProductionParameters}">
+                            <th th:text="${prodParam.name}">Beispiel 1</th>
+                            <td th:text="${prodParam.value}">Wert 1</td>
+                            <td th:text="${prodParam.unit}">Unit</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- customer information panel-->
+                <div id="customer-information" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 th:text="#{product.customerInfo.heading}">Customer information</h3>
+                    </div>
+                    <div class="panel-body" th:if="${customer == null}">
+                        <p th:text="#{product.customerInfo.noInfo}">Sorry, we don't have any customer information for this order!</p>
+                    </div>
+                    <table class="table table-striped" th:if="${customer != null}">
+                        <tr>
+                            <th th:text="#{customer.title.attributeName}">Title</th>
+                            <td th:text="${customerTitle}">Wert 1</td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{customer.firstName.attributeName}">First Name</th>
+                            <td th:text="${customer.firstName}">Wert 2</td>
+                        </tr>
+                        <tr>
+                            <th th:text="#{customer.lastName.attributeName}">Last Name</th>
+                            <td th:text="${customer.lastName}">Wert 3</td>
+                        </tr>
+                        <tr th:if="${customer.email != null}">
+                            <th th:text="#{customer.email.attributeName}">E-Mail</th>
+                            <td th:text="${customer.email}">Wert 3</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
-      </div>
-    </div>
 
-    <!-- product data-->
-    <div class="row">
-
-      <div class="col-md-6">
-        <!-- production information panel-->
-        <div id="product-information" class="panel panel-default">
-          <div class="panel-heading">
-            <h3>Produktionsdaten</h3>
-          </div>
-          <div class="panel-body" th:if="${product.simpleProductionParameters == null}">
-            <span th:if="${product.productionId == null}">Leider sind keine Produktionsparameter für diesen Auftrag vorhanden, da dieser scheinbar noch nicht produziert wurde</span>
-            <span th:if="${product.productionId != null}">Leider sind keine Produktionsparameter für diesen Auftrag vorhanden. Eventuell wird der Datensatz gerade aktualisiert. Versuchen Sie es später noch einmal.</span>
-          </div>
-          <table class="table table-striped" th:if="${product.simpleProductionParameters != null}">
-            <tr>
-              <th>Datenname</th>
-              <th>Wert</th>
-            </tr>
-            <tr th:each="prodParam : ${product.simpleProductionParameters}">
-              <th th:text="${prodParam.name}">Beispiel 1</th>
-              <td th:text="${prodParam.value}">Wert 1</td>
-              <td th:text="${prodParam.unit}">Unit</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <!-- customer information panel-->
-        <div id="customer-information" class="panel panel-default">
-          <div class="panel-heading">
-            <h3>Kundeninformationen</h3>
-          </div>
-          <div class="panel-body" th:if="${customer == null}">
-            <p>Leider liegen uns keine Kundeninformationen zu diesem Auftrag vor!</p>
-          </div>
-          <table class="table table-striped" th:if="${customer != null}">
-            <tr>
-              <th>Anrede</th>
-              <td th:text="${customerTitle}">Wert 1</td>
-            </tr>
-            <tr>
-              <th>Vorname</th>
-              <td th:text="${customer.firstName}">Wert 2</td>
-            </tr>
-            <tr>
-              <th>Nachname</th>
-              <td th:text="${customer.lastName}">Wert 3</td>
-            </tr>
-            <tr th:if="${customer.email != null}">
-              <th>E-Mail</th>
-              <td th:text="${customer.email}">Wert 3</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
+    </section>
 </div>
 
 <!--<div th:replace="fragments/intro :: intro"></div>-->

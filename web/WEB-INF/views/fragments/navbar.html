@@ -37,11 +37,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Go To<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" th:text="#{navbar.goto}">Go To<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="/fim" th:href="@{/fim}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Produktnachverfolgung</a></li>
+                        <li><a href="/fim" th:href="@{/fim}"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span><span th:text="#{navbar.productTracking}">Product Tracking</span></a></li>
                         <li class="divider"></li>
-                        <li><a href="/order" th:href="@{/order}"><span class="glyphicon glyphicon-compressed" aria-hidden="true"></span>Produktbestellung</a></li>
+                        <li><a href="/order" th:href="@{/order}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><span th:text="#{navbar.productOrder}">Product Order</span></a></li>
                     </ul>
                 </li>
             </ul>

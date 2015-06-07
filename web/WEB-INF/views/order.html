@@ -34,94 +34,103 @@
 <div class="container">
     <div class="alert alert-danger" id="orderFailedAlert" th:if="${pageModel.orderFailed}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Bestellung fehlgeschlagen</strong> Da ist etwas bei der internen Verarbeitung schief gelaufen. Versuche
-        es sp&auml;ter noch einmal oder kontaktiere den Administrator
+        <strong id="order-orderFailed-attributeName" th:text="#{order.orderFailed.attributeName}">Order failed</strong> <span id="order-orderFailed-message" th:text="#{order.orderFailed.message}"><!-- TODO: english translation--></span>
     </div>
     <section>
-        <h1>Bestellen Sie Ihre DHBW-Taschenlampe
-            <small>DHBW-Mosbach E-FIT Labor</small>
+        <h1><span th:text="#{order.page.title}">Order your DHBW-Product</span>
+            <small th:text="#{order.page.efitLaboratory}">DHBW-Mosbach E-FIT Laboratory</small>
         </h1>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        Willkommen auf der Bestellseite für eine Taschenlampe des Labors für Evolutionäre-Fertigungs IT
-                        (E-FIT) der Dualen Hochschule Baden-Württemberg Mosbach. Ihre Taschenlampe wird individuell für
-                        Sie gefertigt!
+                    <div class="panel-body" th:text="#{order.page.welcomeMessage}">
+                        Welcome Message
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3>Bestellung</h3>
+                        <h3 th:text="#{order.attributeName}">Order</h3>
                     </div>
                     <div class="panel-body">
-                        <form action="submitorder" method="POST" class="form-horizontal" role="form" id="orderForm" th:object="${customer}">
+                        <form action="submitorder" method="POST" class="form-horizontal" role="form" id="orderForm"
+                              th:object="${customer}">
 
                             <div class="alert alert-danger" id="wrong-form-input-alert" th:if="${#fields.hasErrors()}">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <strong>Uuups...</strong> Bitte fülle das Formular korrekt aus!
-                                <div id="wrong-form-input-errors">
-                                    Folgende Felder sind ungültig:
-                                    <span th:if="${#fields.hasErrors('${customer.gender}')}">Anrede</span>
-                                    <span th:if="${#fields.hasErrors('${customer.firstName}')}">Vorname</span>
-                                    <span th:if="${#fields.hasErrors('${customer.lastName}')}">Nachname</span>
-                                    <span th:if="${#fields.hasErrors('${customer.email}')}">E-Mail</span>
-                                </div>
+                                <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                <strong id="order-formInputError-heading" th:text="#{order.formInputError.heading}">Uuups...</strong> <p id="order-formInputError-message"><strong th:text="#{order.formInputError.message}">Please fill in the form correctly!</strong></p>
+                                <p id="wrong-form-input-errors">
+                                    <span th:text="#{order.formInputError.invalidFields}">The following fields are not valid:</span>
+                                    <span th:if="${#fields.hasErrors('${customer.gender}')}" th:text="#{customer.title.attributeName}">Title</span>
+                                    <span th:if="${#fields.hasErrors('${customer.firstName}')}" th:text="#{customer.firstName.attributeName}">First Name</span>
+                                    <span th:if="${#fields.hasErrors('${customer.lastName}')}" th:text="#{customer.lastName.attributeName}">Last Name</span>
+                                    <span th:if="${#fields.hasErrors('${customer.email}')}" th:text="#{customer.email.attributeName}">E-Mail</span>
+                                </p>
                             </div>
 
                             <!-- Enter Gender -->
                             <div class="form-group">
-                                <label for="gender" class="col-sm-2 control-label">Anrede</label>
+                                <label for="gender" class="col-sm-2 control-label" th:text="#{customer.title.attributeName}">Title</label>
 
                                 <div class="col-sm-10">
                                     <select class="form-control" id="gender" name="gender" th:field="*{gender}">
-                                        <option value="MALE">Herr</option>
-                                        <option value="FEMALE">Frau</option>
+                                        <option value="MALE" th:text="#{customer.title.male}">Mr.</option>
+                                        <option value="FEMALE" th:text="#{customer.title.female}">Mrs.</option>
                                     </select>
                                 </div>
                             </div>
 
                             <!-- Enter first Name -->
-                            <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error has-feedback' : ''">
-                                <label for="firstName" class="col-sm-2 control-label">Vorname</label>
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('firstName')}? 'has-error has-feedback' : ''">
+                                <label for="firstName" class="col-sm-2 control-label" th:text="#{customer.firstName.attributeName}">First Name</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="firstName" name="firstName"
                                            placeholder="Max" required="true" th:field="*{firstName}"/>
-                                    <span th:if="${#fields.hasErrors('firstName')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span th:if="${#fields.hasErrors('firstName')}"
+                                          class="glyphicon glyphicon-remove form-control-feedback"
+                                          aria-hidden="true"></span>
                                 </div>
                             </div>
 
                             <!-- Enter last Name -->
-                            <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback' : ''">
-                                <label for="lastName" class="col-sm-2 control-label">Nachname</label>
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('lastName')}? 'has-error has-feedback' : ''">
+                                <label for="lastName" class="col-sm-2 control-label" th:text="#{customer.lastName.attributeName}">Last Name</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="lastName" name="lastName"
                                            placeholder="Mustermann" required="true" th:field="*{lastName}"/>
-                                    <span th:if="${#fields.hasErrors('lastName')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span th:if="${#fields.hasErrors('lastName')}"
+                                          class="glyphicon glyphicon-remove form-control-feedback"
+                                          aria-hidden="true"></span>
                                 </div>
                             </div>
 
                             <!-- Enter E-Mail Address-->
-                            <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error has-feedback' : ''">
-                                <label for="email" class="col-sm-2 control-label">E-Mail</label>
+                            <div class="form-group"
+                                 th:classappend="${#fields.hasErrors('email')}? 'has-error has-feedback' : ''">
+                                <label for="email" class="col-sm-2 control-label" th:text="#{customer.email.attributeName}">E-Mail</label>
 
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <span class="input-group-addon">@</span>
                                         <input type="text" class="form-control" id="email" name="email"
-                                               placeholder="max.mustermann@m-online.de" required="true" th:field="*{email}"/>
+                                               placeholder="max.mustermann@m-online.de" required="true"
+                                               th:field="*{email}"/>
                                     </div>
-                                    <span th:if="${#fields.hasErrors('email')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    <span th:if="${#fields.hasErrors('email')}"
+                                          class="glyphicon glyphicon-remove form-control-feedback"
+                                          aria-hidden="true"></span>
                                 </div>
                             </div>
 
                             <!-- Choose Product -->
                             <div class="form-group">
-                                <label for="Product" class="col-sm-2 control-label">Produkt</label>
+                                <label for="Product" class="col-sm-2 control-label" th:text="#{product.attributeName}">Product</label>
 
                                 <div class="col-sm-10">
                                     <select class="form-control" id="Product" name="productType">
@@ -133,7 +142,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-10 col-sm-offset-2">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" th:text="#{order.submit}">Submit</button>
                                 </div>
                             </div>
                         </form>

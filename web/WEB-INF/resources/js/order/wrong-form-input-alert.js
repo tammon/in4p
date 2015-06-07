@@ -22,8 +22,8 @@
 $(function () {
     $('#wrong-form-input-alert').addClass('hidden');
     sweetAlert({
-        title: "Uuups...",
-        text: "<strong>Bitte f&uuml;lle das Formular vollst&auml;ndig und korrekt aus:</strong>" + $('#wrong-form-input-errors').html(),
+        title: $('#order-formInputError-heading')[0].outerHTML,
+        text: $('#order-formInputError-message')[0].outerHTML + $('#wrong-form-input-errors')[0].outerHTML,
         html: true,
         type: 'warning'
     });
