@@ -22,7 +22,11 @@
 
     <th:block th:replace="fragments/header :: header(${pageModel.title})"/>
 
-    <script src="../resources/js/index/order-successful-alert.js" type="text/javascript" th:src="@{/static/js/index/order-successful-alert.js}"
+    <link href="../resources/css/index/index-style.css" th:href="@{/static/css/index/index-style.css}" type="text/css"
+          rel="stylesheet"/>
+
+    <script src="../resources/js/index/order-successful-alert.js" type="text/javascript"
+            th:src="@{/static/js/index/order-successful-alert.js}"
             th:if="${pageModel.orderSucceeded}"></script>
 </head>
 <body>
@@ -31,13 +35,40 @@
 
 <div class="container">
     <div class="alert alert-success" th:if="${pageModel.orderSucceeded}" id="orderSucceededAlert">
-    	<button type="button" class="close" data-dismiss="alertSucceededAlert" aria-hidden="true">&times;</button>
-    	<strong>Vielen Dank f&uuml;r Ihre Bestellung!</strong> Ihre Bestellung wurde erfolgreich im System erfasst und wird in k&uuml;rze in die Produktion gehen
+        <button type="button" class="close" data-dismiss="alertSucceededAlert" aria-hidden="true">&times;</button>
+        <strong>Vielen Dank f&uuml;r Ihre Bestellung!</strong> Ihre Bestellung wurde erfolgreich im System erfasst und
+        wird in k&uuml;rze in die Produktion gehen
     </div>
-    <section>
-        <h1>Das ist der Indexcontainer</h1>
-        Dieser dient vorerst nur zur Verdeutlichung der Thymeleaf Parameter Funktion!
-    </section>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Track dein DHBW Produkt</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="../resources/images/magnifying-glass.png" class="img-responsive center-block limit-height"
+                         th:src="@{/static/images/magnifying-glass.png}" alt="track product"/>
+                    <a class="btn btn-danger center-block" type="button" href="/fim" th:href="@{/fim}">Finde dein
+                        Produkt!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Bestelle ein DHBW Produkt</h3>
+                </div>
+                <div class="panel-body ">
+                    <img class="img-responsive center-block limit-height" src="../resources/images/order-basket.png"
+                         th:src="@{/static/images/order-basket.png}" alt="order"/>
+                    <a class="btn btn-danger center-block" type="button" href="/order" th:href="@{/order}">Zur
+                        Bestellung!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </body>
