@@ -49,8 +49,8 @@ public class OrderController {
      * processes the standard order view and the order success and fail page.
      * @return the view "template" with the right attributes in the model according to the Request Parameters
      */
-    @RequestMapping("/order")
-    public String servePageOrder () {
+    @RequestMapping(value = {"/order", "/submitorder"}, method = RequestMethod.GET)
+    public String servePageOrder (Customer customer) {
         // no parameters provided or parameters not plausible (e.g. !submitted && success) --> providing normal order page
         pageModel.clear();
         pageModel.setTitle("Bestellen Sie Ihre Taschenlampe");
