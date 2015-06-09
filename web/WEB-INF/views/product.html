@@ -30,8 +30,8 @@
     <section>
         <h1>
         <span th:if="${customer != null}">
-          <span th:text="">Hallo</span>
-          <span th:if="${customerTitle}"></span>
+          <span th:text="#{product.heading.greeting}">Hallo</span>
+          <span th:text="${customerTitle}"></span>
         <span th:text="${customer.lastName}"></span>!
       </span>
             <span th:if="${customer == null}" th:text="#{product.heading.welcome}">Welcome!</span>
