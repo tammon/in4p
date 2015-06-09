@@ -46,6 +46,11 @@ public class Product extends AbstractDocument {
     private String productionIdPos;
 
     /**
+     * Serial number
+     */
+    private String serialnumber;
+
+    /**
      * A list of assigned simple production parameters
      */
     private List<SimpleProductionParameter> simpleProductionParameters;
@@ -170,6 +175,14 @@ public class Product extends AbstractDocument {
         return xyProductionParameters;
     }
 
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -178,6 +191,7 @@ public class Product extends AbstractDocument {
                 ", productType='" + productType + '\'' +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
+                ", serialnumber='" + serialnumber + '\'' +
                 ", simpleProductionParameters=" + simpleProductionParameters +
                 ", xyProductionParameters=" + xyProductionParameters +
                 '}';

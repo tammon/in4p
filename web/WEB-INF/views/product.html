@@ -89,6 +89,13 @@
                                 [Not yet assigned]
                             </td>
                         </tr>
+                        <tr>
+                            <th th:text="#{product.serialnumber.attributeName}">Serialnumber</th>
+                            <td th:text="${product.serialnumber}" th:if="${product.productionId != null}">Wert 3</td>
+                            <td th:if="${product.serialnumber == null}" th:text="#{product.generalinfo.notYetAssigned}">
+                                [Not yet assigned]
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
