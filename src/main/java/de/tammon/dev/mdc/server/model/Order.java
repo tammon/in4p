@@ -17,12 +17,12 @@
 
 package de.tammon.dev.mdc.server.model;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,7 +38,7 @@ public class Order extends AbstractDocument {
     private Customer customer;
 
     @DBRef (lazy = true)
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
 
     public Order() {
@@ -60,8 +60,8 @@ public class Order extends AbstractDocument {
      * @param product specify the {@link Product} that is contained in this {@link Order}
      */
     public Order(Customer customer, Product product) {
+        this.addProduct(product);
         this.customer = customer;
-        this.products.add(product);
     }
 
     /**
@@ -77,16 +77,15 @@ public class Order extends AbstractDocument {
      * @param products {@link List} of {@link Product}s to be added
      */
     public void addListOfProducts(List<Product> products) {
-        this.products.addAll(products);
+        products.forEach(this::addProduct);
     }
 
     public void addProducts(Product... products) {
-        for (Product product : products) {
-            this.products.add(product);
-        }
+        Arrays.stream(products).forEach(this::addProduct);
     }
 
     public void addProduct (Product product){
+        if (this.products == null) this.products = new ArrayList<>();
         this.products.add(product);
     }
 

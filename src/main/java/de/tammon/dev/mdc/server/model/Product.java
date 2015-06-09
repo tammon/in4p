@@ -17,9 +17,12 @@
 
 package de.tammon.dev.mdc.server.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -65,6 +68,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Creates a new instance of {@link Product}
+     *
      * @param productName specify the product's name
      */
     public Product(String productName, String productType) {
@@ -89,6 +93,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Get Product Type
+     *
      * @return productType
      */
     public String getProductType() {
@@ -97,6 +102,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Get the external Product ID (reffered by QR Code)
+     *
      * @return {@link String} externalProductId
      */
     public String getExternalProductId() {
@@ -105,6 +111,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the externalProductId that is reverenced by the QR Code
+     *
      * @param externalProductId QR Code Id reference
      */
     public void setExternalProductId(String externalProductId) {
@@ -113,6 +120,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the productionId of the product in the MES
+     *
      * @param productionId MES productionId
      */
     public void setProductionId(String productionId) {
@@ -121,6 +129,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the position number of the production identification number in the MES
+     *
      * @param productionIdPos position number of production in MES
      */
     public void setProductionIdPos(String productionIdPos) {
@@ -129,34 +138,40 @@ public class Product extends AbstractDocument {
 
     /**
      * Adds a simple production parameter to the product
+     *
      * @param simpleProductionParameter simple production parameter of the product
      */
     public void addSimpleProductionParameter(SimpleProductionParameter simpleProductionParameter) {
+        if (this.simpleProductionParameters == null) this.simpleProductionParameters = new ArrayList<>();
         this.simpleProductionParameters.add(simpleProductionParameter);
     }
 
     /**
+     * Adds a single X-Y production parameters to the product
+     *
+     * @param xyProductionParameter X-Y production parameter of the product
+     */
+    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
+        if (this.xyProductionParameters == null) this.xyProductionParameters = new ArrayList<>();
+        this.xyProductionParameters.add(xyProductionParameter);
+    }
+
+    /**
      * Adds a list of simple production parameters to the product
+     *
      * @param simpleProductionParameters List of simple production parameters of the product
      */
     public void addListOfSimpleProductionParameters(List<SimpleProductionParameter> simpleProductionParameters) {
-        this.simpleProductionParameters.addAll(simpleProductionParameters);
+        simpleProductionParameters.forEach(this::addSimpleProductionParameter);
     }
 
     /**
      * Adds a list of X-Y production parameters to the product
+     *
      * @param xyProductionParameters List of X-Y production parameters of the product
      */
     public void addListOfXyProductionParameters(List<XYProductionParameter> xyProductionParameters) {
-        this.xyProductionParameters.addAll(xyProductionParameters);
-    }
-
-    /**
-     * Adds a single X-Y production parameters to the product
-     * @param xyProductionParameter X-Y production parameter of the product
-     */
-    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
-        this.xyProductionParameters.add(xyProductionParameter);
+        xyProductionParameters.forEach(this::addXyProductionParameter);
     }
 
     public String getProductName() {
