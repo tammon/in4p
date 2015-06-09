@@ -19,8 +19,6 @@ package de.tammon.dev.mdc.server.model;
 
 import org.springframework.data.annotation.Id;
 
-import java.math.BigInteger;
-
 /**
  * Created by tammschw on 13/04/15.
  */
