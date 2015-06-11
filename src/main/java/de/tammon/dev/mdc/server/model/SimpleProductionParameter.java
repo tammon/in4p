@@ -21,13 +21,13 @@ package de.tammon.dev.mdc.server.model;
  * Created by tammschw on 01/06/15.
  */
 public class SimpleProductionParameter extends AbstractProductionParameter {
-    private double value;
+    private String value;
 
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }
