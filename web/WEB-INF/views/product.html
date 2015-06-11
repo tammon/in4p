@@ -111,11 +111,13 @@
                         <h3 th:text="#{product.productionData.heading}">Produktionsdaten</h3>
                     </div>
                     <div class="panel-body" th:if="${product.simpleProductionParameters == null}">
-                        <span th:if="${product.productionId == null}" th:text="#{product.productionData.notYetAvailable.noProductionIdGiven}">No production data and production id is not given message</span>
-                        <span th:if="${product.productionId != null}" th:text="#{product.productionData.notYetAvailable.productionIdGiven}">No production data although production id is given message</span>
+                        <span th:if="${product.productionId == null}"
+                              th:text="#{product.productionData.notYetAvailable.noProductionIdGiven}">No production data and production id is not given message</span>
+                        <span th:if="${product.productionId != null}"
+                              th:text="#{product.productionData.notYetAvailable.productionIdGiven}">No production data although production id is given message</span>
                     </div>
                     <table class="table table-striped" th:if="${product.simpleProductionParameters != null}">
-                        <tr>
+                        <tr th:if="false">
                             <th th:text="#{product.productionData.dataName}">Data name</th>
                             <th th:text="#{product.productionData.value}">Value</th>
                             <th th:text="#{product.productionData.unit}">Unit</th>
@@ -136,7 +138,8 @@
                         <h3 th:text="#{product.customerInfo.heading}">Customer information</h3>
                     </div>
                     <div class="panel-body" th:if="${customer == null}">
-                        <p th:text="#{product.customerInfo.noInfo}">Sorry, we don't have any customer information for this order!</p>
+                        <p th:text="#{product.customerInfo.noInfo}">Sorry, we don't have any customer information for
+                            this order!</p>
                     </div>
                     <table class="table table-striped" th:if="${customer != null}">
                         <tr>
