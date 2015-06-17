@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by tammschw on 07/06/15.
  */
 @RestController
-@RequestMapping(value = {"/api/fim/{id}", "/api/product/{id}"})
+@RequestMapping(value = {"/api/fim/{id}", "/api/getProductById/{id}"})
 public class ProductRestController {
 
     @Autowired

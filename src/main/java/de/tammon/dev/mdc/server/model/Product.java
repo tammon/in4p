@@ -17,12 +17,11 @@
 
 package de.tammon.dev.mdc.server.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +40,11 @@ public class Product extends AbstractDocument {
 
     @NotNull
     private String productType;
+
+    /**
+     * The Date on which this Product was last updated from subsystems
+     */
+    private Date lastUpdated;
 
     /**
      * ID and Position that is used during the production process
@@ -198,12 +202,17 @@ public class Product extends AbstractDocument {
         this.serialnumber = serialnumber;
     }
 
+    public void updated() {
+        this.lastUpdated = new Date();
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "productName='" + productName + '\'' +
                 ", externalProductId='" + externalProductId + '\'' +
                 ", productType='" + productType + '\'' +
+                ", lastUpdated=" + lastUpdated +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
                 ", serialnumber='" + serialnumber + '\'' +

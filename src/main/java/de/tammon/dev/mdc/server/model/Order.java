@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,8 +41,11 @@ public class Order extends AbstractDocument {
     @DBRef (lazy = true)
     private List<Product> products;
 
+    private Date submitDate, lastUpdated;
+
 
     public Order() {
+        this.submitDate = new Date();
     }
 
     /**
@@ -52,6 +56,7 @@ public class Order extends AbstractDocument {
     public Order(Customer customer, List<Product> products) {
         this.customer = customer;
         this.products = products;
+        this.submitDate = new Date();
     }
 
     /**
@@ -108,5 +113,9 @@ public class Order extends AbstractDocument {
 
     public String getOrderId() {
         return orderId;
+    }
+
+    public void updated() {
+        this.lastUpdated = new Date();
     }
 }
