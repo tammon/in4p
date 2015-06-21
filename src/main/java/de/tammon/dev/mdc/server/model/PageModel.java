@@ -32,7 +32,7 @@ public class PageModel {
     }
 
     public void setTitle(String title) {
-        this.title = this.title == null ? title : this.title;
+        this.title = (this.title == null) ? title : this.title;
     }
 
     public String getPageName() {
