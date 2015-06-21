@@ -20,7 +20,9 @@
 <head lang="en">
     <meta charset="UTF-8"/>
     <th:block th:replace="fragments/header :: header(${pageModel.title})"/>
-
+    <script src="../resources/js/product/productNotFound-alert.js"
+            th:src="@{/static/js/product/productNotFound-alert.js}"
+            th:if="${product == null}"></script>
 </head>
 <body>
 
@@ -37,6 +39,11 @@
             <span th:if="${customer == null}" th:text="#{product.heading.welcome}">Welcome!</span>
             <small th:text="#{product.heading.subheading}">production data overview</small>
         </h1>
+        <div class="alert alert-danger" id="product-notFound-alert" th:if="${product == null}">
+            <p id="product-notFound-attributeName"><strong th:text="#{product.productNotFound.attributeName}">Order
+                failed</strong></p>
+            <p id="product-notFound-message" th:text="#{product.productNotFound.message}"> </p>
+        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
                 <div class="panel panel-default">
@@ -78,10 +85,16 @@
                     <div class="panel-heading">
                         <h3 th:text="#{product.generalinfo.heading}">Ihr DHBW-Mosbach Produkt</h3>
                     </div>
-                    <table class="table table-striped">
+                    <div class="panel-body" th:if="${product == null}">
+                        <span th:text="#{product.productNotFound.message}"></span>
+                    </div>
+                    <table class="table table-striped" th:if="${product != null}">
                         <tr>
                             <th th:text="#{product.productName.attributeName}">Produktname</th>
-                            <td th:text="${product.productName}">Wert 1</td>
+                            <td th:text="${product.productName}" th:if="${product.productName != null}">Wert 1</td>
+                            <td th:if="${product.productName == null}" th:text="#{product.generalinfo.notFound}">
+                                [NOT FOUND]
+                            </td>
                         </tr>
                         <tr>
                             <th th:text="#{product.productionId.attributeName}">Production ID</th>
@@ -118,24 +131,29 @@
                     <div class="panel-heading">
                         <h3 th:text="#{product.productionData.heading}">Produktionsdaten</h3>
                     </div>
-                    <div class="panel-body" th:if="${product.simpleProductionParameters == null}">
+                    <th:block th:if="${product != null}">
+                        <div class="panel-body" th:if="${product.simpleProductionParameters == null}">
                         <span th:if="${product.productionId == null}"
                               th:text="#{product.productionData.notYetAvailable.noProductionIdGiven}">No production data and production id is not given message</span>
                         <span th:if="${product.productionId != null}"
                               th:text="#{product.productionData.notYetAvailable.productionIdGiven}">No production data although production id is given message</span>
+                        </div>
+                        <table class="table table-striped" th:if="${product.simpleProductionParameters != null}">
+                            <tr th:if="false">
+                                <th th:text="#{product.productionData.dataName}">Data name</th>
+                                <th th:text="#{product.productionData.value}">Value</th>
+                                <th th:text="#{product.productionData.unit}">Unit</th>
+                            </tr>
+                            <tr th:each="prodParam : ${product.simpleProductionParameters}">
+                                <th th:text="${prodParam.name}">Beispiel 1</th>
+                                <td th:text="${prodParam.value}">Wert 1</td>
+                                <td th:text="${prodParam.unit}">Unit</td>
+                            </tr>
+                        </table>
+                    </th:block>
+                    <div class="panel-body" th:if="${product == null}">
+                        <span th:text="#{product.productNotFound.message}"></span>
                     </div>
-                    <table class="table table-striped" th:if="${product.simpleProductionParameters != null}">
-                        <tr th:if="false">
-                            <th th:text="#{product.productionData.dataName}">Data name</th>
-                            <th th:text="#{product.productionData.value}">Value</th>
-                            <th th:text="#{product.productionData.unit}">Unit</th>
-                        </tr>
-                        <tr th:each="prodParam : ${product.simpleProductionParameters}">
-                            <th th:text="${prodParam.name}">Beispiel 1</th>
-                            <td th:text="${prodParam.value}">Wert 1</td>
-                            <td th:text="${prodParam.unit}">Unit</td>
-                        </tr>
-                    </table>
                 </div>
             </div>
 
@@ -171,17 +189,22 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            	<div class="panel panel-default">
-            		  <div class="panel-heading">
-            				<h3 class="panel-title">KOMPETENZZENTRUM FERTIGUNGS- UND INFORMATIONSMANAGEMENT (FIM)</h3>
-            		  </div>
-                    <a href="http://www.dhbw-mosbach.de/studienzentren/emit3/fe-projekte/kompetenzzentrum-fertigungs-und-informationsmanagement.html"><img src="../resources/images/emit_test_e2.jpg" th:src="@{/static/images/emit_test_e2.jpg}" class="img-responsive center-block" alt="EMIT Labor"/></a>
-            		  <div class="panel-body">
-                          <a class="btn btn-danger btn-lg center-block" href="http://www.dhbw-mosbach.de/studienzentren/emit3/fe-projekte/kompetenzzentrum-fertigungs-und-informationsmanagement.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Zur FIM Webseite</a>
-                      </div>
-            	</div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">KOMPETENZZENTRUM FERTIGUNGS- UND INFORMATIONSMANAGEMENT (FIM)</h3>
+                    </div>
+                    <a href="http://www.dhbw-mosbach.de/studienzentren/emit3/fe-projekte/kompetenzzentrum-fertigungs-und-informationsmanagement.html"><img
+                            src="../resources/images/emit_test_e2.jpg" th:src="@{/static/images/emit_test_e2.jpg}"
+                            class="img-responsive center-block" alt="EMIT Labor"/></a>
+
+                    <div class="panel-body">
+                        <a class="btn btn-danger btn-lg center-block"
+                           href="http://www.dhbw-mosbach.de/studienzentren/emit3/fe-projekte/kompetenzzentrum-fertigungs-und-informationsmanagement.html"><span
+                                class="glyphicon glyphicon-home" aria-hidden="true"></span>Zur FIM Webseite</a>
+                    </div>
+                </div>
             </div>
-            
+
         </div>
 
     </section>
