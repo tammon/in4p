@@ -33,4 +33,7 @@
        <!-- Import Content Negotiation -->
        <import resource="classpath:configuration/content-negotiation-config.xml"/>
 
+       <!-- Import rest template config -->
+       <import resource="classpath:configuration/rest-template-config.xml"/>
+
 </beans>
