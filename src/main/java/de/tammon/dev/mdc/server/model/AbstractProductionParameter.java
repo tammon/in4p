@@ -22,6 +22,7 @@ package de.tammon.dev.mdc.server.model;
  */
 public abstract class AbstractProductionParameter {
 
+    private String attributeName;
     private String name;
     private String unit;
 
@@ -39,5 +40,13 @@ public abstract class AbstractProductionParameter {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getAttributeName() {
+        return attributeName;
+    }
+
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
     }
 }
