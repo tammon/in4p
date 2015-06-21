@@ -40,7 +40,6 @@ public class ProductRestController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Product> getProduct (@PathVariable String id) {
         Product product = databaseService.getProductByExternalProductId(id);
-        System.out.println(product);
         if (product != null) return new ResponseEntity<>(product, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
