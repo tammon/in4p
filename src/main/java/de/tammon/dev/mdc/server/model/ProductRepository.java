@@ -21,6 +21,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by tammschw on 12/04/15.
  */
@@ -33,4 +35,6 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     @Query("{ $and: [{ 'productionId' : ?0 }, { 'productionIdPos' : ?1 }] }")
     Product getByProductionIdAndPosition(String productionId, String productionIdPos);
+
+    List<Product> findAll();
 }

@@ -18,7 +18,6 @@
 package de.tammon.dev.mdc.server.service;
 
 import de.tammon.dev.mdc.server.model.*;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -147,4 +146,6 @@ public class DatabaseService {
     public Customer getCustomerByEmail(String Email) {
         return customerRepository.getByEmail(Email);
     }
+
+    public List<Product> getAllProducts(){ return productRepository.findAll(); }
 }
