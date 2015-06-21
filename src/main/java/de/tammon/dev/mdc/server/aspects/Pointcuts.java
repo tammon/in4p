@@ -70,4 +70,7 @@ public class Pointcuts {
 
     @Pointcut("execution(* de.tammon.dev.mdc.server.controller.api.rest.*.get*(..))")
     public void allRestGetMethods () {}
+
+    @Pointcut("execution(* de.tammon.dev.mdc.server.service.HydraService.*FromHydra*(..))")
+    public void allCommunicatingMethodsWithinHydraService () {}
 }
