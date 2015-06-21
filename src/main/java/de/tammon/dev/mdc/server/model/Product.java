@@ -30,6 +30,8 @@ import java.util.List;
 @Component
 public class Product extends AbstractDocument {
 
+    // ---- ATTRIBUTES ----
+
     private String productName;
 
     /**
@@ -45,6 +47,8 @@ public class Product extends AbstractDocument {
      * The Date on which this Product was last updated from subsystems
      */
     private Date lastUpdated;
+
+    private boolean finalObject;
 
     /**
      * ID and Position that is used during the production process
@@ -67,18 +71,8 @@ public class Product extends AbstractDocument {
      */
     private List<XYProductionParameter> xyProductionParameters;
 
-    public Product() {
-    }
 
-    /**
-     * Creates a new instance of {@link Product}
-     *
-     * @param productName specify the product's name
-     */
-    public Product(String productName, String productType) {
-        this.productName = productName;
-        this.productType = productType;
-    }
+    // ---- METHODS ----
 
     public void setProductName(String productName) {
         this.productName = productName;
@@ -206,6 +200,21 @@ public class Product extends AbstractDocument {
         this.lastUpdated = new Date();
     }
 
+    public boolean isFinal() {
+        return finalObject;
+    }
+
+    public void setFinal() {
+        this.finalObject = true;
+    }
+
+    public boolean noSimpleProdParams() {
+        if (simpleProductionParameters == null) return true;
+        boolean result = false;
+        for (SimpleProductionParameter spp : simpleProductionParameters) result |= spp.getValue().isEmpty();
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -213,6 +222,7 @@ public class Product extends AbstractDocument {
                 ", externalProductId='" + externalProductId + '\'' +
                 ", productType='" + productType + '\'' +
                 ", lastUpdated=" + lastUpdated +
+                ", finalObject=" + finalObject +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
                 ", serialnumber='" + serialnumber + '\'' +
