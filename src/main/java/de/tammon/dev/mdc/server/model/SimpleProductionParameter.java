@@ -30,4 +30,14 @@ public class SimpleProductionParameter extends AbstractProductionParameter {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "SimpleProductionParameter{" +
+                "attributeName='" + getAttributeName() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", unit='" + getUnit() + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
