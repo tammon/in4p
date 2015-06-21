@@ -22,6 +22,7 @@ import de.tammon.dev.mdc.server.model.Order;
 import de.tammon.dev.mdc.server.model.PageModel;
 import de.tammon.dev.mdc.server.model.Product;
 import de.tammon.dev.mdc.server.service.DatabaseService;
+import de.tammon.dev.mdc.server.service.HydraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,30 +39,43 @@ import java.util.Locale;
 public class ProductController extends AbstractMdcController {
 
     private static final String PRODUCT_PAGE = "product";
+
     @Autowired
     DatabaseService databaseService;
+
+    @Autowired
+    HydraService hydraService;
 
     @RequestMapping(value = {"/product", "/fim"}, method = RequestMethod.GET)
     public String servePageProduct(Model model,
                                    String id,
                                    Locale locale) {
+        pageModel.clear();
         Product product;
+        Order order;
+        Customer customer;
 
-        if (id != null && (product = databaseService.getProductByExternalProductId(id)) != null) {
-            Order order;
-            Customer customer;
+        if (id == null) product = getExampleProduct();
+        else {
+            if ((product = databaseService.getProductByExternalProductId(id)) != null) {
 
-            // Get order and customer from database selected by containing product
-            // add them to model if they were found in database
-            if ((order = databaseService.getOrderByContainingProduct(product)) != null) model.addAttribute(order);
-            if ((customer = order.getCustomer()) != null) {
-                model.addAttribute(customer);
-                model.addAttribute("customerTitle", getCustomerTitle(customer, locale));
+                // Get order and customer from database selected by containing product
+                // add them to model if they were found in database
+                if ((order = databaseService.getOrderByContainingProduct(product)) != null) {
+                    model.addAttribute(order);
+                    if ((customer = order.getCustomer()) != null) {
+                        model.addAttribute(customer);
+                        model.addAttribute("customerTitle", getCustomerTitle(customer, locale));
+                    }
+                }
+            } else {
+                if ((product = hydraService.getProductFromHydraById(id)) != null)
+                    if (!product.noSimpleProdParams())
+                        databaseService.save(product);
             }
-        } else product = getExampleProduct();
+        }
 
-
-        model.addAttribute(product);
+        if (product != null) model.addAttribute(product);
         pageModel.setTitle(messageSource.getMessage("product.pageTitle", null, locale));
 
         return PRODUCT_PAGE;
