@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by tammschw on 07/06/15.
+ * Handles Requests to the REST API
  */
 @RestController
 @RequestMapping(value = {"/api/fim/{id}", "/api/getProductById/{id}"})

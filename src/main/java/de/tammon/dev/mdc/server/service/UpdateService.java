@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by tammschw on 21/06/15.
+ * UpdateService
  */
 @Service
 @Configuration
@@ -40,6 +40,9 @@ public class UpdateService {
     @Autowired
     HydraService hydraService;
 
+    /**
+     * Scheduled task will be executed every 20s to update all products in the local database
+     */
     @Scheduled(fixedRate = 20000)
     public void updateProducts(){
         List<Product> products = databaseService.getAllProducts();

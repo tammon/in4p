@@ -84,7 +84,7 @@ public class ProductController extends AbstractMdcController {
     private Product getExampleProduct() {
         Product product = new Product();
         product.setProductName("Taschenlampe");
-        product.setProductType("1");
+        product.setProductType("TASCHENLAMPE");
         return product;
     }
 
