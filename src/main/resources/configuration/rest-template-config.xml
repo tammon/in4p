@@ -16,17 +16,17 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<configuration>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+       <bean class="org.springframework.web.client.RestTemplate">
+              <constructor-arg>
+                     <bean class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+                            <property name="readTimeout" value="3000"/>
+                            <property name="connectTimeout" value="3000"/>
+                     </bean>
+              </constructor-arg>
+       </bean>
 
-    <root level="info">
-        <appender-ref ref="STDOUT" />
-    </root>
-</configuration>
+</beans>

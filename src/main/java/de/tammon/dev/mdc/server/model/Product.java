@@ -20,6 +20,8 @@ package de.tammon.dev.mdc.server.model;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +29,8 @@ import java.util.List;
  */
 @Component
 public class Product extends AbstractDocument {
+
+    // ---- ATTRIBUTES ----
 
     private String productName;
 
@@ -40,10 +44,22 @@ public class Product extends AbstractDocument {
     private String productType;
 
     /**
+     * The Date on which this Product was last updated from subsystems
+     */
+    private Date lastUpdated;
+
+    private boolean finalObject;
+
+    /**
      * ID and Position that is used during the production process
      */
     private String productionId;
     private String productionIdPos;
+
+    /**
+     * Serial number
+     */
+    private String serialnumber;
 
     /**
      * A list of assigned simple production parameters
@@ -55,17 +71,8 @@ public class Product extends AbstractDocument {
      */
     private List<XYProductionParameter> xyProductionParameters;
 
-    public Product() {
-    }
 
-    /**
-     * Creates a new instance of {@link Product}
-     * @param productName specify the product's name
-     */
-    public Product(String productName, String productType) {
-        this.productName = productName;
-        this.productType = productType;
-    }
+    // ---- METHODS ----
 
     public void setProductName(String productName) {
         this.productName = productName;
@@ -84,6 +91,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Get Product Type
+     *
      * @return productType
      */
     public String getProductType() {
@@ -92,6 +100,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Get the external Product ID (reffered by QR Code)
+     *
      * @return {@link String} externalProductId
      */
     public String getExternalProductId() {
@@ -100,6 +109,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the externalProductId that is reverenced by the QR Code
+     *
      * @param externalProductId QR Code Id reference
      */
     public void setExternalProductId(String externalProductId) {
@@ -108,6 +118,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the productionId of the product in the MES
+     *
      * @param productionId MES productionId
      */
     public void setProductionId(String productionId) {
@@ -116,6 +127,7 @@ public class Product extends AbstractDocument {
 
     /**
      * Set the position number of the production identification number in the MES
+     *
      * @param productionIdPos position number of production in MES
      */
     public void setProductionIdPos(String productionIdPos) {
@@ -124,34 +136,40 @@ public class Product extends AbstractDocument {
 
     /**
      * Adds a simple production parameter to the product
+     *
      * @param simpleProductionParameter simple production parameter of the product
      */
     public void addSimpleProductionParameter(SimpleProductionParameter simpleProductionParameter) {
+        if (this.simpleProductionParameters == null) this.simpleProductionParameters = new ArrayList<>();
         this.simpleProductionParameters.add(simpleProductionParameter);
     }
 
     /**
+     * Adds a single X-Y production parameters to the product
+     *
+     * @param xyProductionParameter X-Y production parameter of the product
+     */
+    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
+        if (this.xyProductionParameters == null) this.xyProductionParameters = new ArrayList<>();
+        this.xyProductionParameters.add(xyProductionParameter);
+    }
+
+    /**
      * Adds a list of simple production parameters to the product
+     *
      * @param simpleProductionParameters List of simple production parameters of the product
      */
     public void addListOfSimpleProductionParameters(List<SimpleProductionParameter> simpleProductionParameters) {
-        this.simpleProductionParameters.addAll(simpleProductionParameters);
+        simpleProductionParameters.forEach(this::addSimpleProductionParameter);
     }
 
     /**
      * Adds a list of X-Y production parameters to the product
+     *
      * @param xyProductionParameters List of X-Y production parameters of the product
      */
     public void addListOfXyProductionParameters(List<XYProductionParameter> xyProductionParameters) {
-        this.xyProductionParameters.addAll(xyProductionParameters);
-    }
-
-    /**
-     * Adds a single X-Y production parameters to the product
-     * @param xyProductionParameter X-Y production parameter of the product
-     */
-    public void addXyProductionParameter(XYProductionParameter xyProductionParameter) {
-        this.xyProductionParameters.add(xyProductionParameter);
+        xyProductionParameters.forEach(this::addXyProductionParameter);
     }
 
     public String getProductName() {
@@ -170,14 +188,44 @@ public class Product extends AbstractDocument {
         return xyProductionParameters;
     }
 
+    public String getSerialnumber() {
+        return serialnumber;
+    }
+
+    public void setSerialnumber(String serialnumber) {
+        this.serialnumber = serialnumber;
+    }
+
+    public void updated() {
+        this.lastUpdated = new Date();
+    }
+
+    public boolean isFinal() {
+        return finalObject;
+    }
+
+    public void setFinal() {
+        this.finalObject = true;
+    }
+
+    public boolean noSimpleProdParams() {
+        if (simpleProductionParameters == null) return true;
+        boolean result = false;
+        for (SimpleProductionParameter spp : simpleProductionParameters) result |= spp.getValue().isEmpty();
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "productName='" + productName + '\'' +
                 ", externalProductId='" + externalProductId + '\'' +
                 ", productType='" + productType + '\'' +
+                ", lastUpdated=" + lastUpdated +
+                ", finalObject=" + finalObject +
                 ", productionId='" + productionId + '\'' +
                 ", productionIdPos='" + productionIdPos + '\'' +
+                ", serialnumber='" + serialnumber + '\'' +
                 ", simpleProductionParameters=" + simpleProductionParameters +
                 ", xyProductionParameters=" + xyProductionParameters +
                 '}';

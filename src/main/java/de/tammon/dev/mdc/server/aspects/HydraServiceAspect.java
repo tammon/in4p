@@ -15,29 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
+package de.tammon.dev.mdc.server.aspects;
+
+import de.tammon.dev.mdc.server.service.HydraService;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 
 /**
- * Created by tammschw on 01/06/15.
+ * Created by tammschw on 20/06/15.
  */
-public class SimpleProductionParameter extends AbstractProductionParameter {
-    private String value;
+@Aspect
+@Component
+public class HydraServiceAspect {
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "SimpleProductionParameter{" +
-                "attributeName='" + getAttributeName() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", unit='" + getUnit() + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+    @Before("de.tammon.dev.mdc.server.aspects.Pointcuts.allCommunicatingMethodsWithinHydraService()")
+    public void setHydraSettings(JoinPoint joinPoint) {
+        ((HydraService) joinPoint.getThis()).setHydraSettings();
     }
 }

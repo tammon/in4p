@@ -67,4 +67,10 @@ public class Pointcuts {
     @Pointcut("execution(String de.tammon.dev.mdc.server.controller.OrderController.submitOrder(..)) && args(customer, bindingResult, product)")
     public void submitOrderHandler(Customer customer, BindingResult bindingResult, Product product) {
     }
+
+    @Pointcut("execution(* de.tammon.dev.mdc.server.controller.api.rest.*.get*(..))")
+    public void allRestGetMethods () {}
+
+    @Pointcut("execution(* de.tammon.dev.mdc.server.service.HydraService.*FromHydra*(..))")
+    public void allCommunicatingMethodsWithinHydraService () {}
 }

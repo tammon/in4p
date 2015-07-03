@@ -15,29 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.tammon.dev.mdc.server.model;
-
 /**
- * Created by tammschw on 01/06/15.
+ * Created by tammschw on 20/06/15.
  */
-public class SimpleProductionParameter extends AbstractProductionParameter {
-    private String value;
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "SimpleProductionParameter{" +
-                "attributeName='" + getAttributeName() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", unit='" + getUnit() + '\'' +
-                ", value='" + value + '\'' +
-                '}';
-    }
-}
+$(function () {
+    $('#product-notFound-alert').addClass('hidden');
+    sweetAlert({
+        title: "404",
+        text: $('#product-notFound-attributeName')[0].outerHTML + $('#product-notFound-message').html(),
+        html: true,
+        type: "error"});
+});
